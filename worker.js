@@ -3,7 +3,7 @@
 
 // RESEND_API_KEY is provided as a Cloudflare secret and read from `env` per request.
 // Set it once with:  wrangler secret put RESEND_API_KEY
-const FROM_EMAIL = 'hello@techseries.ai';
+const FROM_EMAIL = 'onboarding@resend.dev';
 const FROM_NAME = 'TechSeries.ai';
 
 // ── CORS headers ──

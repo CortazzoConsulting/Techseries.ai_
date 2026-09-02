@@ -105,7 +105,10 @@ ethan@techseries.ai · (480) 268-3484 · moderates all events
 
 ## Email System
 - Worker endpoint: https://restless-forest-42da.ethan-93f.workers.dev/subscribe
-- From: hello@techseries.ai · Notify: ethan@techseries.ai
+- From: `onboarding@resend.dev` (Resend's shared sandbox sender) · Notify: ethan@techseries.ai
+  Sandbox senders only deliver to the Resend account owner's own address. Switch
+  `FROM_EMAIL` back to hello@techseries.ai once techseries.ai is verified in Resend,
+  otherwise welcome emails to real subscribers are rejected.
 - Welcome email fires automatically on subscribe
 - **The Resend API key is a Cloudflare Worker secret named `RESEND_API_KEY`.**
   Never hardcode it in `worker.js` or write it into this file — this repo is public.
