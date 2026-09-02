@@ -109,8 +109,18 @@ async function handleSubscribe(request, env) {
 
     const welcomeData = await welcomeRes.json();
 
-    // ── 3. Notify Ethan ──
-    await fetch('https://api.resend.com/emails', {
+    // Resend rejects sends for unverified domains, bad keys and sandbox-sender
+    // restrictions. Surface that instead of reporting a success that never happened.
+    if (!welcomeRes.ok) {
+      console.error('Resend rejected the welcome email:', welcomeRes.status, JSON.stringify(welcomeData));
+      return json({
+        error: 'We could not send your welcome email. Please try again.',
+        resend: { status: welcomeRes.status, message: welcomeData.message || welcomeData.name || null }
+      }, 502);
+    }
+
+    // ── 3. Notify Ethan — a failure here must not fail the subscriber ──
+    const notifyRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
@@ -126,7 +136,16 @@ async function handleSubscribe(request, env) {
       })
     });
 
-    return json({ success: true, message: 'Subscribed successfully' });
+    if (!notifyRes.ok) {
+      const notifyData = await notifyRes.json().catch(() => ({}));
+      console.error('Resend rejected the notification email:', notifyRes.status, JSON.stringify(notifyData));
+    }
+
+    return json({
+      success: true,
+      message: 'Subscribed successfully',
+      id: welcomeData.id || null
+    });
 
   } catch (err) {
     console.error(err);
