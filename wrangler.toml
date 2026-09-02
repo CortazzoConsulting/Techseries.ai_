@@ -1,0 +1,11 @@
+# Cloudflare Worker config for the TechSeries.ai email subscription endpoint.
+#
+# With Workers Builds connected to this repo, every push to main deploys
+# worker.js automatically — no dashboard paste step.
+#
+# RESEND_API_KEY is deliberately NOT here. Secrets belong in the Worker's
+# Settings -> Variables and Secrets, never in a committed file.
+
+name = "restless-forest-42da"
+main = "worker.js"
+compatibility_date = "2026-09-02"

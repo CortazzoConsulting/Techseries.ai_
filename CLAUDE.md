@@ -19,8 +19,15 @@ git push origin main
 # Cloudflare auto-deploys in ~60 seconds
 ```
 
-The Worker deploys separately from Pages — pushing `worker.js` does NOT deploy it.
-Deploy the Worker with `wrangler deploy`, or paste it into the Cloudflare dashboard.
+Pages and the Worker are two separate deploys from this one repo:
+- **Pages** (the site) auto-deploys `index.html` on push.
+- **Worker** (`restless-forest-42da`, the email endpoint) deploys via Workers
+  Builds, configured by `wrangler.toml`. Once Workers Builds is connected to
+  this repo, pushing `worker.js` deploys it too.
+
+If Workers Builds is ever disconnected, the Worker must be deployed by hand
+(dashboard -> Edit code -> paste -> Deploy) and will otherwise silently keep
+running old code while the repo moves ahead.
 
 ## Navigation System
 - All pages: `<div id="pg-{id}" class="pg">`
