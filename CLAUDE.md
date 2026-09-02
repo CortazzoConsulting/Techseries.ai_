@@ -105,7 +105,7 @@ ethan@techseries.ai · (480) 268-3484 · moderates all events
 
 ## Email System
 - Worker endpoint: https://restless-forest-42da.ethan-93f.workers.dev/subscribe
-- From: hello@techseries.ai · Notify: ethan@techseries.ai
+- From: ethan@techseries.ai · Notify: ethan@techseries.ai
 - techseries.ai is a verified sending domain in Resend. The records live in
   Cloudflare DNS: MX + SPF on `send.techseries.ai`, DKIM at
   `resend._domainkey.techseries.ai`. Leave them DNS-only (grey cloud).
