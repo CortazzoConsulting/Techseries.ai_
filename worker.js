@@ -211,17 +211,18 @@ function welcomeEmailHTML(firstName) {
         ⚡ Next Event
       </div>
       <div style="font-size:20px;font-weight:900;color:#ffffff;margin-bottom:6px;">
-        Autonomous Business Systems
+        AI in Real Estate: From Leads to Deals
       </div>
       <div style="font-size:13px;color:#888;margin-bottom:16px;">
-        From Automation to AI Agents<br>
-        📅 October 22, 2026 · 5:00–7:30 PM<br>
-        📍 Life Time Work Sandy Springs · Free Admission
+        How AI Agents &amp; Automation Are Reshaping Real Estate<br>
+        📅 October 22, 2026 · 5:00–8:30 PM<br>
+        📍 Life Time Work Sandy Springs<br>
+        🎟 Early Bird $20 through Oct 12 · General Admission $30
       </div>
       <a href="https://app.getnetworked.com/event/-autonomous-business-systems-from-automation-to-ai-agents"
          style="display:inline-block;background:#e8192c;color:#ffffff;text-decoration:none;
                 padding:12px 24px;border-radius:6px;font-weight:700;font-size:13px;">
-        Register Free →
+        Get Tickets →
       </a>
     </div>
 

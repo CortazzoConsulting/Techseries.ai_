@@ -68,7 +68,7 @@ pg-about, pg-register
 | AI-Native Companies | Apr 30 | 4:00–7:30 PM | `#6b8cff` | Completed |
 | The Economics of AI | Jun 18 | 5:30–7:30 PM | `--green` | Completed |
 | Building AI-Ready Teams | Aug 20 | 5:00–7:30 PM | `--orange` | Completed |
-| Autonomous Business Systems | Oct 22 | 5:00–7:30 PM | `--red` | CURRENT MAIN EVENT |
+| AI in Real Estate: From Leads to Deals | Oct 22 | 5:00–8:30 PM | `--red` | CURRENT MAIN EVENT (ticketed) |
 | Executive Summit 2027 | Dec 9 | All Day | `--gold` | Upcoming |
 | TechSeries AM | Monthly | 7:30–9:00 AM | `#a78bfa` | Recurring |
 
@@ -78,6 +78,8 @@ pg-about, pg-register
 - Jun 18: https://app.getnetworked.com/event/-the-economics-of-ai-roi-costs-and-scaling-reality
 - Aug 20: https://app.getnetworked.com/event/-building-ai-ready-teams-talent-culture-leadership-in-the-ai-era
 - Oct 22: https://app.getnetworked.com/event/-autonomous-business-systems-from-automation-to-ai-agents
+  (The event was renamed in place to AI in Real Estate — the old slug is still the
+  live URL and matches the flyer QR code. Don't "fix" it to a real-estate slug.)
 - Dec 9:  https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027
 
 ## Past Events
@@ -98,10 +100,21 @@ pg-about, pg-register
   James Stovall (Workfast Consulting, ex-Deloitte) + Sara Branch
 
 ## Current Main Event — October 22
+**Tech Series: AI in Real Estate — From Leads to Deals**
+How AI Agents & Automation Are Reshaping Real Estate. Industry-focused edition for
+agents, brokers, investors, developers, lenders, property managers, builders,
+architects, proptech, and vendors. Curated networking + AI-powered attendee matches
+through GetNetworked.
 - Speaker: TBA (not yet announced)
 - Sponsors: Getnetworked, Cortazzo Consulting LLC, + 1 other
-- Format: Keynote + Panel + Networking Reception
-- Schedule: 5:00 arrival → 5:30 program → 6:30 networking
+- Format: Keynote + Industry Panel + Workflow Demos + Q&A + Networking Reception
+- Schedule: 5:00–6:00 arrival, curated networking + partner showcase →
+  6:00–7:30 main program → 7:30–8:30 networking reception
+- Food: light bites, drinks, charcuterie
+- Tickets: Early Bird $20 (through Oct 12) · General Admission $30 (from Oct 13) ·
+  VIP Connect $49 (limited) · Team Pass $75 (4 attendees)
+- After Oct 12: update the home urgency line, hero card, and ticket rows that
+  lead with Early Bird pricing
 
 ## Venue
 Life Time Work Sandy Springs — 5600 Roswell Rd Building C, Sandy Springs, GA 30342
