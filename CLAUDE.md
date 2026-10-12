@@ -7,7 +7,10 @@ GitHub: cortazzoconsulting/Techseries.ai_ (branch: main)
 Hosting: Cloudflare Pages (auto-deploys on git push)
 
 ## Files
-- `index.html` — the entire website (~7.8MB single-file SPA, base64 images embedded)
+- `index.html` — the entire website (~9.4MB single-file SPA, base64 images embedded).
+  The Oct 22 page carries a 17-image "Event Preview" gallery (the social carousel),
+  embedded at 800px wide / JPEG q70 to keep the file from ballooning. Resize any new
+  gallery art the same way before embedding — full-resolution art will add megabytes.
 - `worker.js` — Cloudflare Worker for email subscriptions via Resend
 - `CNAME` — custom domain for Cloudflare Pages
 
@@ -105,8 +108,15 @@ How AI Agents & Automation Are Reshaping Real Estate. Industry-focused edition f
 agents, brokers, investors, developers, lenders, property managers, builders,
 architects, proptech, and vendors. Curated networking + AI-powered attendee matches
 through GetNetworked.
-- Speaker: TBA (not yet announced)
-- Sponsors: Getnetworked, Cortazzo Consulting LLC, + 1 other
+- **Speakers (announced Oct 2026):**
+  - Micro keynotes: Glennda Baker (The Queen of Real Estate Video, 1.4M+ followers,
+    1B+ views) · Jim Fountain (Founder, Elated Real Estate, 27+ yrs, 1,000+ homeowners,
+    $1B+ volume)
+  - Panel: Tim Wright (moderator, Cushman & Wakefield) · Jessica Wade (eXp Realty) ·
+    Mark Phillips (Phillips Brothers Real Estate) · Tim Stone (Seo Capital Group)
+  - Host & MC: Ethan Cortazzo
+- Partners: Ohlson & Medlock (closing attorneys), Elated Real Estate,
+  Venture CPA & Tax Advisors, Life Time Work Sandy Springs (venue), Getnetworked
 - Format: Keynote + Industry Panel + Workflow Demos + Q&A + Networking Reception
 - Schedule: 5:00–6:00 arrival, curated networking + partner showcase →
   6:00–7:30 main program → 7:30–8:30 networking reception
