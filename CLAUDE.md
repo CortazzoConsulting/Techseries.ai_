@@ -13,7 +13,9 @@ Hosting: Cloudflare Pages (auto-deploys on git push)
   gallery art the same way before embedding — full-resolution art will add megabytes.
 - `worker.js` — Cloudflare Worker for email subscriptions via Resend
 - `CNAME` — custom domain for Cloudflare Pages
-- `_redirects` — Cloudflare Pages rewrite so /executive-summit serves the SPA
+- `og-summit.jpg` — 1200x630 social card for the summit (crawlers cannot read data: URIs)
+- `functions/executive-summit.js` — Pages Function serving index.html at /executive-summit
+  with summit-specific title/OG/canonical injected via HTMLRewriter
 
 ## Deployment
 ```bash
@@ -201,10 +203,15 @@ Page: `pg-ev-summit`, also reachable at techseries.ai/executive-summit via `_red
 - Tickets (GetNetworked is the only checkout): Founding Community $79 (Oct 13–23) ·
   Early Bird $99 (Oct 24–Nov 6) · General $149 (Nov 7–Dec 9) · VIP Executive $249
   (Oct 13–Dec 7) · Corporate Team $499 for 4 (Oct 13–Dec 4)
-- Ticket status is computed in `summitInit()` from each card's data-start/data-end.
-  It only ever shows Coming soon / Available / Sales ended — never "sold out",
-  which only GetNetworked knows. The CTA reads "Join the Priority List" until the
-  first release opens, then "Secure Your Pass".
+- **`SUMMIT_TICKETS_LIVE` gates everything.** It is `false` until the tiers are
+  actually live and purchasable in GetNetworked. While false, every tier shows
+  "Not yet on sale" (no dates promised) and all CTAs read "Join the Priority List"
+  pointing at the GetNetworked RSVP. Flip it to `true` only after confirming
+  purchase works; the per-tier data-start/data-end windows then drive
+  Coming soon / Available / Sales ended. Never "sold out" — only GetNetworked knows.
+- Sponsorship inquiries use `sponsorInquiry()`, which validates and opens a prefilled
+  email. There is no backend: the Worker's email has been down since RESEND_API_KEY
+  was never set. Do not reintroduce a form that posts nowhere.
 - Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
 
 ### Publication rules for the Summit — do not break these
@@ -219,3 +226,5 @@ Page: `pg-ev-summit`, also reachable at techseries.ai/executive-summit via `_red
 5. Don't promise catering, VIP perks, or sponsor activations before they're confirmed.
 6. Registration/payment stays on GetNetworked — never add a second checkout.
 7. Summit changes are not deployed without the organizer's explicit approval.
+8. No unverified attendance or speaker counts in copy **or artwork**. The supplied
+   summit flyer's "1,000+ attendees · 30+ speakers" line was painted out before use.

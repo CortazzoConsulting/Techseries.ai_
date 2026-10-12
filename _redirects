@@ -1,3 +1,0 @@
-# Serve the single-page app at a clean summit URL (rewrite, not a redirect)
-/executive-summit    /index.html   200
-/executive-summit/   /index.html   200
