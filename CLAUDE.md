@@ -13,6 +13,7 @@ Hosting: Cloudflare Pages (auto-deploys on git push)
   gallery art the same way before embedding — full-resolution art will add megabytes.
 - `worker.js` — Cloudflare Worker for email subscriptions via Resend
 - `CNAME` — custom domain for Cloudflare Pages
+- `_redirects` — Cloudflare Pages rewrite so /executive-summit serves the SPA
 
 ## Deployment
 ```bash
@@ -72,7 +73,7 @@ pg-about, pg-register
 | The Economics of AI | Jun 18 | 5:30–7:30 PM | `--green` | Completed |
 | Building AI-Ready Teams | Aug 20 | 5:00–7:30 PM | `--orange` | Completed |
 | AI in Real Estate: From Leads to Deals | Oct 22 | 5:00–8:30 PM | `--red` | CURRENT MAIN EVENT (ticketed) |
-| Executive Summit 2027 | Dec 9 | All Day | `--gold` | Upcoming |
+| Executive Summit 2027 | Dec 9 | 9:00 AM–6:00 PM EST | `--gold` | Flagship, ticketed |
 | TechSeries AM | Monthly | 7:30–9:00 AM | `#a78bfa` | Recurring |
 
 ## Getnetworked URLs
@@ -191,3 +192,30 @@ Sponsor inquiries stay as an internal form emailing ethan@techseries.ai.
 7. Update the urgency line and hero card details
 8. Add the new page to the nav map in `go()`
 9. Update overall site stats if needed
+
+
+## Executive Summit 2027 — December 9, 2026
+Flagship full-day summit: "The State of AI in Business: 2027 Outlook".
+Page: `pg-ev-summit`, also reachable at techseries.ai/executive-summit via `_redirects`.
+- 9:00 AM–6:00 PM EST · main program 10:00–5:00 · reception 5:00–6:00 · Atlanta, venue TBA
+- Tickets (GetNetworked is the only checkout): Founding Community $79 (Oct 13–23) ·
+  Early Bird $99 (Oct 24–Nov 6) · General $149 (Nov 7–Dec 9) · VIP Executive $249
+  (Oct 13–Dec 7) · Corporate Team $499 for 4 (Oct 13–Dec 4)
+- Ticket status is computed in `summitInit()` from each card's data-start/data-end.
+  It only ever shows Coming soon / Available / Sales ended — never "sold out",
+  which only GetNetworked knows. The CTA reads "Join the Priority List" until the
+  first release opens, then "Secure Your Pass".
+- Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
+
+### Publication rules for the Summit — do not break these
+1. **No community partner or speaker may be named, logo'd, or hinted at** anywhere —
+   page copy, metadata, structured data, or source — until the organizer approves
+   that specific announcement in writing. `SUMMIT_PARTNERS` ships empty and the
+   partner block stays `hidden`; adding an entry is what publishes it.
+2. Speakers show "Speaker Announcements Coming Soon" until confirmed.
+3. No attendance projections. Internal targets (200–300 attendees, 6–8 partners,
+   12–18 speakers) are planning figures and must never appear publicly.
+4. Venue stays "announcing soon" until the booking is confirmed.
+5. Don't promise catering, VIP perks, or sponsor activations before they're confirmed.
+6. Registration/payment stays on GetNetworked — never add a second checkout.
+7. Summit changes are not deployed without the organizer's explicit approval.
