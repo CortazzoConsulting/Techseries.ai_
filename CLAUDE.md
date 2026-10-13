@@ -4,7 +4,9 @@
 Single-file HTML SPA for TechSeries.ai — Atlanta's AI business event series.
 Live at: https://techseries.ai
 GitHub: cortazzoconsulting/Techseries.ai_ (branch: main)
-Hosting: Cloudflare Pages (auto-deploys on git push)
+Hosting: **GitHub Pages** (auto-deploys on git push; Cloudflare is only DNS/CDN
+in front). There are no Cloudflare Pages Functions, no `_redirects`, and no edge
+rewrites — clean URLs need a real directory with an index.html.
 
 ## Files
 - `index.html` — the entire website (~9.4MB single-file SPA, base64 images embedded).
@@ -14,8 +16,8 @@ Hosting: Cloudflare Pages (auto-deploys on git push)
 - `worker.js` — Cloudflare Worker for email subscriptions via Resend
 - `CNAME` — custom domain for Cloudflare Pages
 - `og-summit.jpg` — 1200x630 social card for the summit (crawlers cannot read data: URIs)
-- `functions/executive-summit.js` — Pages Function serving index.html at /executive-summit
-  with summit-specific title/OG/canonical injected via HTMLRewriter
+- `executive-summit/index.html` — static entry point carrying the summit's title,
+  OG/Twitter tags and Event schema, then handing off to the SPA via /?p=executive-summit
 
 ## Deployment
 ```bash
@@ -26,7 +28,7 @@ git push origin main
 ```
 
 Pages and the Worker are two separate deploys from this one repo:
-- **Pages** (the site) auto-deploys `index.html` on push.
+- **GitHub Pages** serves the site; `index.html` goes live ~40s after a push.
 - **Worker** (`restless-forest-42da`, the email endpoint) deploys via Workers
   Builds, configured by `wrangler.toml`. Once Workers Builds is connected to
   this repo, pushing `worker.js` deploys it too.

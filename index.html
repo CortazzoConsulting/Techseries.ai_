@@ -3863,7 +3863,9 @@ function summitInit(){
     }).join('');
     SUMMIT_PARTNERS.forEach(function(p,i){ pw.children[i].firstChild.textContent = p.name; });
   }
-  if (/^\/executive-summit\/?$/.test(location.pathname)) go('ev-summit');
+  // /executive-summit/ is a static entry point (GitHub Pages has no edge functions)
+  // that carries the summit's social metadata and hands off here via ?p=
+  if (/^\/executive-summit\/?$/.test(location.pathname) || /[?&]p=executive-summit\b/.test(location.search)) go('ev-summit');
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', summitInit);
 else summitInit();
