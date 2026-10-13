@@ -15,7 +15,10 @@ rewrites — clean URLs need a real directory with an index.html.
   gallery art the same way before embedding — full-resolution art will add megabytes.
 - `worker.js` — Cloudflare Worker for email subscriptions via Resend
 - `CNAME` — custom domain for Cloudflare Pages
-- `og-summit.jpg` — 1200x630 social card for the summit (crawlers cannot read data: URIs)
+- `og-default.jpg` — 1200x630 site-wide social card (home/all SPA routes)
+- `og-summit.jpg` — 1200x630 social card for the summit
+  **Social images must be real files, never base64 data URIs** — LinkedIn, Facebook
+  and iMessage cannot fetch a data: URI, so a data-URI og:image shows no preview.
 - `executive-summit/index.html` — static entry point carrying the summit's title,
   OG/Twitter tags and Event schema, then handing off to the SPA via /?p=executive-summit
 

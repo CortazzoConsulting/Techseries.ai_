@@ -1,0 +1,3 @@
+# Local Claude Code session config (preview server, etc.) — not part of the site
+.claude/
+.DS_Store
