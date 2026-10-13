@@ -200,7 +200,8 @@ Sponsor inquiries stay as an internal form emailing ethan@techseries.ai.
 
 ## Executive Summit 2027 — December 9, 2026
 Flagship full-day summit: "The State of AI in Business: 2027 Outlook".
-Page: `pg-ev-summit`, also reachable at techseries.ai/executive-summit via `_redirects`.
+Page: `pg-ev-summit`, also reachable at techseries.ai/executive-summit/ via the
+static entry point `executive-summit/index.html` (GitHub Pages has no edge rewrites).
 - 9:00 AM–6:00 PM EST · main program 10:00–5:00 · reception 5:00–6:00 · Atlanta, venue TBA
 - Tickets (GetNetworked is the only checkout): Founding Community $79 (Oct 13–23) ·
   Early Bird $99 (Oct 24–Nov 6) · General $149 (Nov 7–Dec 9) · VIP Executive $249
