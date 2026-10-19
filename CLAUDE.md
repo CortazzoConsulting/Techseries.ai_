@@ -129,10 +129,12 @@ through GetNetworked.
 - Schedule: 5:00–6:00 arrival, curated networking + partner showcase →
   6:00–7:30 main program → 7:30–8:30 networking reception
 - Food: light bites, drinks, charcuterie
-- Tickets: Early Bird $20 (through Oct 12) · General Admission $30 (from Oct 13) ·
-  VIP Connect $49 (limited) · Team Pass $75 (4 attendees)
-- After Oct 12: update the home urgency line, hero card, and ticket rows that
-  lead with Early Bird pricing
+- Tickets: **General Admission $30 (current)** · VIP Connect $49 (limited) ·
+  Team Pass $75 (4 attendees). Early Bird $20 closed Oct 12 — its tier card is
+  dimmed and marked "Sales ended" rather than removed.
+- When a price window closes, update: home urgency line, home hero card ticket row,
+  series card blurb, event hero meta, the tier cards, the sidebar card rows and
+  footnote, and **both** pricing FAQs (there are two).
 
 ## Venue
 Life Time Work Sandy Springs — 5600 Roswell Rd Building C, Sandy Springs, GA 30342
