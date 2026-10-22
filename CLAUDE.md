@@ -54,6 +54,12 @@ from it, so **a passing date no longer needs a manual edit**.
 - When the last event ends, the countdown reads "2027 season announcing soon".
 - Adding an event = one entry in `TS_EVENTS` plus `data-ts-event` on its cards.
 
+## Speaker directory
+`pg-speakers` has search + per-event filter chips over the 27 `.spk-full` cards.
+Chips are derived from each card's `.spk-ev-tag` at load, so a new speaker shows up
+in the filters with no extra wiring — just add the card with its event tag.
+Empty groups hide themselves; the count line and empty state update live.
+
 ## Social
 Instagram: https://www.instagram.com/techseries.ai/ (footer, team links, og:see_also)
 

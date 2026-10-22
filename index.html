@@ -22,7 +22,7 @@
   <meta name="twitter:description" content="Five curated AI business events for Atlanta's founders, executives, and operators. Powered by Getnetworked at Life Time Work Sandy Springs.">
   <meta name="twitter:image" content="https://techseries.ai/og-default.jpg">
   <!-- SEO -->
-  <meta name="description" content="TechSeries.ai — Atlanta's premier AI business event series 2026. Five curated evenings for executives, founders, and operators. Powered by Getnetworked at Life Time Work Sandy Springs.">
+  <meta name="description" content="TechSeries.ai — Atlanta's premier AI business event series 2026. Four curated evenings and a full-day flagship for executives, founders, operators, and builders. Powered by Getnetworked at Life Time Work Sandy Springs.">
   <meta name="keywords" content="Atlanta AI events, AI business events Atlanta, TechSeries AI, AI networking Atlanta, executive AI events, Getnetworked">
   <link rel="canonical" href="https://techseries.ai">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Atlanta AI Day: The State of AI — Now & Next","startDate":"2026-12-10T09:00:00-05:00","endDate":"2026-12-10T18:00:00-05:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"Life Time Work Sandy Springs","address":{"@type":"PostalAddress","streetAddress":"5600 Roswell Rd Building C","addressLocality":"Sandy Springs","addressRegion":"GA","postalCode":"30342","addressCountry":"US"}},"image":"https://techseries.ai/og-aiday.jpg","description":"Tech Series' year-end flagship — a full day uniting Atlanta's AI communities. Keynotes, community-led sessions, live demos, and curated networking.","organizer":{"@type":"Organization","name":"TechSeries.ai","url":"https://techseries.ai"},"url":"https://techseries.ai/atlanta-ai-day/","offers":{"@type":"Offer","price":"79","priceCurrency":"USD","availability":"https://schema.org/PreOrder","url":"https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027"}}</script>
@@ -54,6 +54,8 @@ body{padding-top:var(--tb);}
 /* the hero tag pill is full-width; stop it short of the corner actions so the
    two never overlap. Scoped to this page — other event heroes keep full width. */
 @media(min-width:1101px){#pg-ev-summit .ev-tag{max-width:calc(100% - 262px);}}
+.spk-chip{display:inline-block;padding:.35rem .7rem;border:1px solid var(--bo);border-radius:100px;background:rgba(250,250,248,.04);color:var(--mu);font-family:var(--fm);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,color .2s;}
+.spk-chip:hover{border-color:var(--blue);color:var(--wht);}
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:600;display:flex;align-items:center;justify-content:center;gap:.55rem;padding:0 1rem;cursor:pointer;background:linear-gradient(90deg,rgba(201,162,39,.22),rgba(201,162,39,.1));border-bottom:1px solid rgba(201,162,39,.35);white-space:nowrap;overflow:hidden;}
 .topbar b{font-family:var(--fm);font-size:clamp(.5rem,1.1vw,.62rem);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .topbar span{font-family:var(--fm);font-size:clamp(.5rem,1.1vw,.62rem);letter-spacing:.08em;text-transform:uppercase;color:var(--wht);text-decoration:underline;flex:0 0 auto;}
@@ -791,7 +793,7 @@ nav{animation:navSlideIn .45s ease both;}
     <div class="hgrid"></div>
     <div class="eyebrow">Getnetworked × Life Time Work Sandy Springs</div>
     <h1 class="H1">FROM AI<br><em>AWARENESS</em><br>TO EXECUTION</h1>
-    <p style="font-size:1.05rem;color:var(--mu);max-width:540px;line-height:1.75;margin-bottom:2.5rem;">Atlanta's premier AI business event series. Five curated evenings in 2026 connecting executives, founders, and operators building the AI-native companies of tomorrow.</p>
+    <p style="font-size:1.05rem;color:var(--mu);max-width:540px;line-height:1.75;margin-bottom:2.5rem;">Atlanta's premier AI business event series. Four curated evenings through 2026, closing with a full-day flagship — connecting the executives, founders, operators, and builders shaping how AI actually gets used.</p>
     <!-- COUNTDOWN + URGENCY -->
     <div style="margin-bottom:1.5rem;">
       <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;">
@@ -2247,6 +2249,14 @@ nav{animation:navSlideIn .45s ease both;}
     <h2 class="H2">The People<br>Behind the Ideas.</h2>
     <p class="desc">Every TechSeries.ai speaker is a practitioner with real implementation experience — no keynote-circuit theorists. Real operators who have done the work.</p>
 
+    <div style="margin:1.75rem 0 2rem;">
+      <input id="spk-search" type="search" placeholder="Search speakers by name, company, or topic…" oninput="tsFilterSpeakers()"
+        style="width:100%;max-width:480px;padding:.8rem 1rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:8px;color:var(--wht);font-family:var(--fb);font-size:.88rem;box-sizing:border-box;">
+      <div id="spk-chips" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem;"></div>
+      <div id="spk-count" style="font-family:var(--fm);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-top:.85rem;"></div>
+      <div id="spk-empty" style="display:none;padding:2rem 0;color:var(--mu);font-size:.88rem;">No speakers match that search. <span onclick="tsClearSpeakers()" style="color:var(--blue);cursor:pointer;text-decoration:underline;">Clear filters</span></div>
+    </div>
+
     <!-- 2026 Confirmed Speakers -->
     <div style="margin-bottom:3rem;">
       <div class="lbl" style="color:var(--blue);margin-bottom:1.25rem;">2026 Series — Confirmed</div>
@@ -2958,7 +2968,7 @@ nav{animation:navSlideIn .45s ease both;}
     <h2 class="H2">Atlanta's Home for<br>AI Business Execution</h2>
     <div class="twocol" style="margin-bottom:5rem;">
       <div>
-        <p style="color:var(--mu);line-height:1.8;margin-bottom:1.25rem;font-size:.96rem;">TechSeries.ai is the flagship event series from <strong style="color:var(--wht);">Getnetworked</strong> — Atlanta's community platform for AI business leaders. We produce five curated evenings per year at Life Time Work in Sandy Springs, bringing together the region's top operators, founders, and executives.</p>
+        <p style="color:var(--mu);line-height:1.8;margin-bottom:1.25rem;font-size:.96rem;">TechSeries.ai is the flagship event series from <strong style="color:var(--wht);">Getnetworked</strong> — Atlanta's community platform for AI business leaders. We produce four curated evenings and a full-day flagship each year at Life Time Work in Sandy Springs, bringing together the region's top operators, founders, and executives.</p>
         <p style="color:var(--mu);line-height:1.8;margin-bottom:1.25rem;font-size:.96rem;">Our events aren't panels about AI's potential. They're rooms full of people actively implementing it — sharing real numbers, real failures, and real frameworks. Every session follows a structured program: keynote, executive panel, builder spotlight, and meaningful networking.</p>
         <p style="color:var(--mu);line-height:1.8;margin-bottom:2rem;font-size:.96rem;">The 2026 series follows a deliberate arc: from understanding what AI-native companies actually look like, through the economics of scaling AI and building AI-ready teams, to an industry deep-dive on AI in real estate — closing with Atlanta AI Day. It culminates in Atlanta AI Day — one city, every AI community, one day.</p>
         <div class="row">
@@ -3968,6 +3978,64 @@ var SUMMIT_PARTNERS = [];           // {name, logo, url, blurb, session}
 var SUMMIT_TICKETS_LIVE = false;
 var SUMMIT_REG_URL = 'https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027?r=aaahoi';
 
+/* Speaker directory: search + per-event chips. Chips are derived from the cards
+   themselves, so newly added speakers appear in the filters automatically. */
+var tsSpkFilter = '';
+function tsSpeakerCards(){ return [].slice.call(document.querySelectorAll('#pg-speakers .spk-full')); }
+function tsSpeakerGroups(){
+  return [].slice.call(document.querySelectorAll('#pg-speakers .lbl')).map(function(l){ return l.parentElement; })
+    .filter(function(g){ return g && g.querySelector('.spk-full'); });
+}
+function tsBuildSpeakerChips(){
+  var wrap = document.getElementById('spk-chips');
+  if (!wrap) return;
+  var seen = [];
+  tsSpeakerCards().forEach(function(c){
+    var t = c.querySelector('.spk-ev-tag');
+    if (!t) return;
+    var ev = t.textContent.trim().split('·')[0].trim();
+    if (seen.indexOf(ev) < 0) seen.push(ev);
+  });
+  var html = '<span class="spk-chip" data-ev="" onclick="tsSetSpeakerFilter(\'\')">All</span>';
+  seen.forEach(function(ev){
+    html += '<span class="spk-chip" data-ev="' + ev + '" onclick="tsSetSpeakerFilter(\'' + ev.replace(/'/g, "\\'") + '\')">' + ev + '</span>';
+  });
+  wrap.innerHTML = html;
+}
+function tsSetSpeakerFilter(ev){ tsSpkFilter = ev; tsFilterSpeakers(); }
+function tsClearSpeakers(){
+  tsSpkFilter = '';
+  var q = document.getElementById('spk-search'); if (q) q.value = '';
+  tsFilterSpeakers();
+}
+function tsFilterSpeakers(){
+  var qEl = document.getElementById('spk-search');
+  var q = (qEl ? qEl.value : '').trim().toLowerCase();
+  var shown = 0, cards = tsSpeakerCards();
+  cards.forEach(function(c){
+    var tag = c.querySelector('.spk-ev-tag');
+    var ev = tag ? tag.textContent.trim().split('·')[0].trim() : '';
+    var hay = c.textContent.toLowerCase();
+    var ok = (!q || hay.indexOf(q) > -1) && (!tsSpkFilter || ev === tsSpkFilter);
+    c.style.display = ok ? '' : 'none';
+    if (ok) shown++;
+  });
+  tsSpeakerGroups().forEach(function(g){
+    var any = [].slice.call(g.querySelectorAll('.spk-full')).some(function(c){ return c.style.display !== 'none'; });
+    g.style.display = any ? '' : 'none';
+  });
+  [].slice.call(document.querySelectorAll('.spk-chip')).forEach(function(ch){
+    var on = (ch.getAttribute('data-ev') || '') === tsSpkFilter;
+    ch.style.background = on ? 'rgba(26,58,255,.18)' : 'rgba(250,250,248,.04)';
+    ch.style.borderColor = on ? 'var(--blue)' : 'var(--bo)';
+    ch.style.color = on ? 'var(--wht)' : 'var(--mu)';
+  });
+  var count = document.getElementById('spk-count');
+  if (count) count.textContent = 'Showing ' + shown + ' of ' + cards.length + ' speakers';
+  var empty = document.getElementById('spk-empty');
+  if (empty) empty.style.display = shown ? 'none' : 'block';
+}
+
 function jumpToForm(P){
   var form = document.getElementById(P + '-form');
   if (!form) return;
@@ -4076,8 +4144,9 @@ function summitInit(){
   // that carries the summit's social metadata and hands off here via ?p=
   if (/^\/(executive-summit|atlanta-ai-day)\/?$/.test(location.pathname) || /[?&]p=(executive-summit|atlanta-ai-day)\b/.test(location.search)) go('ev-summit');
 }
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', summitInit);
-else summitInit();
+function tsInitSpeakers(){ if (document.getElementById('spk-chips')){ tsBuildSpeakerChips(); tsFilterSpeakers(); } }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ summitInit(); tsInitSpeakers(); });
+else { summitInit(); tsInitSpeakers(); }
 </script>
 </body>
 </html>
