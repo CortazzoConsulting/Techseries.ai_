@@ -35,6 +35,10 @@ export default {
       return handleIntake(request, env, 'sponsor');
     }
 
+    if (request.method === 'POST' && url.pathname === '/partner') {
+      return handleIntake(request, env, 'partner');
+    }
+
     return new Response('Not found', { status: 404 });
   }
 };
@@ -186,8 +190,9 @@ async function handleIntake(request, env, kind) {
       return json({ error: 'Please include your first name and a valid email address.' }, 400);
     }
 
-    const isSpeaker = kind === 'speaker';
-    const label = isSpeaker ? 'Speaker application' : 'Sponsorship inquiry';
+    const label = kind === 'speaker' ? 'Speaker application'
+                : kind === 'partner' ? 'Community partner inquiry'
+                : 'Sponsorship inquiry';
 
     const confirmRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -199,9 +204,9 @@ async function handleIntake(request, env, kind) {
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         reply_to: 'ethan@techseries.ai',
         to: [email],
-        subject: isSpeaker
-          ? 'Thanks for applying to speak — TechSeries.ai'
-          : 'Thanks for your interest in sponsoring — TechSeries.ai',
+        subject: kind === 'speaker' ? 'Thanks for applying to speak — TechSeries.ai'
+               : kind === 'partner' ? 'Thanks for reaching out about community partnership — TechSeries.ai'
+               : 'Thanks for your interest in sponsoring — TechSeries.ai',
         html: intakeEmailHTML(firstName, kind)
       })
     });
@@ -364,23 +369,33 @@ function welcomeEmailHTML(firstName) {
 
 function intakeEmailHTML(firstName, kind) {
   const isSpeaker = kind === 'speaker';
-  const accent  = isSpeaker ? '#1a3aff' : '#c9a227';
-  const eyebrow = isSpeaker ? 'Application Received' : 'Inquiry Received';
-  const headline = isSpeaker ? 'You&rsquo;re on our radar.' : 'Let&rsquo;s build something together.';
+  const isPartner = kind === 'partner';
+  const accent  = isSpeaker ? '#1a3aff' : isPartner ? '#00c472' : '#c9a227';
+  const eyebrow = isSpeaker ? 'Application Received' : isPartner ? 'Partnership Inquiry Received' : 'Inquiry Received';
+  const headline = isSpeaker ? 'You&rsquo;re on our radar.'
+                 : isPartner ? 'Let&rsquo;s bring your community in.'
+                 : 'Let&rsquo;s build something together.';
   const intro = isSpeaker
     ? 'Thanks for applying to speak at Tech Series. We read every application ourselves &mdash; no auto-filter &mdash; and we&rsquo;ll follow up personally about fit, format, and which date makes sense.'
+    : isPartner
+    ? 'Thanks for reaching out about community partnership. Atlanta AI Day is built to bring every AI community in the city under one roof, and we&rsquo;ll follow up personally to talk through how yours can take part.'
     : 'Thanks for your interest in partnering with Tech Series. We&rsquo;ll follow up personally to walk through packages, availability, and what actually makes sense for your goals.';
   const steps = isSpeaker
     ? [['01','We review','Our team reads your application and looks at topic fit for upcoming programs.'],
        ['02','We reach out','If there&rsquo;s a fit, we&rsquo;ll email you to talk through the session and format.'],
        ['03','We lock it in','Confirmed speakers get promotion across the series, the site, and the recap.']]
+    : isPartner
+    ? [['01','We connect','We set up a short call to understand your community, your people, and your goals.'],
+       ['02','We shape it','Together we pick the format &mdash; a session, a lane, a showcase, or co-promotion.'],
+       ['03','We announce','Once confirmed, your community is featured on the site and across the series.']]
     : [['01','We review','Our team looks at your goals and which rooms put you in front of the right people.'],
        ['02','We reach out','You get tiers, booth options, and what&rsquo;s still available &mdash; not a generic deck.'],
        ['03','You go live','Logo on the flyer, booth staged, tickets issued, lead list delivered after.']];
   const proof = isSpeaker
     ? [['800+','Registrations'],['300+','In-Person'],['20+','Speakers']]
+    : isPartner
+    ? [['500+','Community'],['300+','In-Person'],['30+','Organizations']]
     : [['800+','Registrations'],['300+','In-Person'],['108K+','Organic Reach']];
-
   const stepRows = steps.map(function (st) {
     return '<tr>'
       + '<td width="44" valign="top" style="padding:0 0 18px;font-family:Courier New,Courier,monospace;font-size:12px;letter-spacing:2px;color:' + accent + ';">' + st[0] + '</td>'
@@ -398,6 +413,8 @@ function intakeEmailHTML(firstName, kind) {
 
   const preheader = isSpeaker
     ? 'We received your speaker application &mdash; here&rsquo;s what happens next.'
+    : isPartner
+    ? 'We received your community partnership inquiry &mdash; here&rsquo;s what happens next.'
     : 'We received your sponsorship inquiry &mdash; here&rsquo;s what happens next.';
 
   return `<!DOCTYPE html>
