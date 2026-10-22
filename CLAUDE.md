@@ -232,7 +232,7 @@ offset-safe: `body{padding-top:var(--tb)}` and `nav{top:var(--tb)}` move togethe
 so nav-to-content spacing is unchanged. `--tb` is 34px desktop / 32px mobile, where
 the `.tb-long` date+venue span is hidden to keep it on one line.
 
-## Intake forms — speaker & sponsor
+## Intake forms — speaker, sponsor & community partner
 `.ev-hero-actions` puts Apply to Speak / Become a Sponsor in the top-right corner of
 the Atlanta AI Day hero. They call `jumpToForm(P)`, which scrolls to `{P}-form` and
 focuses its first field. Hidden below 1100px, where they would collide with the
@@ -240,11 +240,14 @@ title — the Get Involved block right below covers that case.
 
 Real forms, not mailto. `submitIntake(kind, P)` in `index.html` POSTs JSON to the
 Worker. `P` is the element-id prefix, so the same form can appear more than once:
-`spk` (Atlanta AI Day page), `hspk` (home page), `spo` (sponsor). Every instance
+`spk` (speaker), `spo` (sponsor), `spar` (community partner), `hspk` (home speaker). Every instance
 needs its own `{P}-form`, `{P}-first`, `{P}-last`, `{P}-email`, `{P}-btn`,
 `{P}-status` — duplicate ids will break both copies.
 - `POST /speaker` — firstName, lastName, email
 - `POST /sponsor` — plus company, interest, message
+- `POST /partner` — community partners / AI community builders, same shape as sponsor
+The extra fields are only attached for `sponsor` and `partner`; adding a fourth kind
+that needs them means updating that condition in `submitIntake` too.
 Both send a TechSeries-branded confirmation to the applicant (`intakeEmailHTML`) and a
 notification to ethan@techseries.ai with `reply_to` set to the applicant. Submitted
 values are HTML-escaped before entering the notification email.

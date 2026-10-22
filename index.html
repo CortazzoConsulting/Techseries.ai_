@@ -1867,6 +1867,7 @@ nav{animation:navSlideIn .45s ease both;}
     <div class="ev-hero-actions">
       <button onclick="jumpToForm('spk')">Apply to Speak →<span class="eha-sub">Get on the stage</span></button>
       <button onclick="jumpToForm('spo')">Become a Sponsor →<span class="eha-sub">Put your brand in the room</span></button>
+      <button onclick="jumpToForm('spar')" style="background:rgba(0,196,114,.08);border-color:rgba(0,196,114,.5);color:var(--green);">Community Partner →<span class="eha-sub">Bring your community</span></button>
     </div>
     <div class="ev-tag" style="color:var(--gold);border-color:var(--gold);">★ Year-End Flagship · Presented by Tech Series AI</div>
     <div class="ev-title" style="color:var(--gold);">Atlanta<br>AI Day</div>
@@ -1896,7 +1897,7 @@ nav{animation:navSlideIn .45s ease both;}
         <p class="ev-para">The day is built in blocks, not back-to-back sessions — with real breaks and space to connect, because the best conversations happen in the hallway, not just on stage.</p>
 
         <div class="ev-sect" style="margin-top:0;">Get Involved</div>
-        <p class="ev-para">Want to be on stage, or put your brand in front of the room? Start here &mdash; our team follows up personally.</p>
+        <p class="ev-para">Speaking, sponsoring, or bringing your AI community along? Start here &mdash; our team follows up personally.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:.75rem;margin-bottom:1.75rem;align-items:start;">
 <div id="spk-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:0;">
           <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Apply to Speak</div>
@@ -1924,12 +1925,32 @@ nav{animation:navSlideIn .45s ease both;}
             <option>Platinum Sponsor ($5,000)</option>
             <option>Gold Sponsor ($2,500)</option>
             <option>Silver Sponsor ($1,000)</option>
-            <option>Community partnership</option>
           </select>
           <textarea id="spo-message" rows="3" placeholder="Anything you'd like us to know (optional)" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;"></textarea>
           <button class="bp" id="spo-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--gold);color:#0a0a0f;" onclick="submitIntake('sponsor')">Send Sponsorship Inquiry →</button>
           <div id="spo-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
         </div>
+<div id="spar-form" style="border:1px solid rgba(0,196,114,.3);border-radius:12px;padding:1.5rem;background:rgba(0,196,114,.03);margin-bottom:0;">
+            <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;">Community Partner</div>
+            <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Run an AI community, meetup, or builder group? Bring your people into the room.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
+              <input id="spar-first" placeholder="First name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+              <input id="spar-last" placeholder="Last name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+            </div>
+            <input id="spar-email" type="email" placeholder="Email address" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;">
+            <input id="spar-company" placeholder="Community / organization" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;">
+            <select id="spar-interest" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;background:rgba(10,10,15,.9);">
+              <option>How you'd like to take part</option>
+              <option>Host a community-led session</option>
+              <option>Co-promote to our members</option>
+              <option>Run a lane or track</option>
+              <option>Partner showcase presence</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+            <textarea id="spar-message" rows="3" placeholder="Tell us about your community (optional)" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;"></textarea>
+            <button class="bp" id="spar-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--green);color:#0a0a0f;" onclick="submitIntake('partner','spar')">Become a Community Partner →</button>
+            <div id="spar-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
+          </div>
         </div>
 
         <div class="ev-sect" style="margin-top:2rem;">What Attendees Will Experience</div>
@@ -1975,19 +1996,19 @@ nav{animation:navSlideIn .45s ease both;}
 
         <div class="ev-sect" id="summit-agenda">Preliminary Agenda</div>
         <div class="schedule">
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">9:00–10:00</div><div class="schedule-body"><div class="schedule-title">Registration, Coffee &amp; Executive Networking</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">10:00–10:20</div><div class="schedule-body"><div class="schedule-title">Opening Keynote: The State of AI in Business</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">10:20–11:05</div><div class="schedule-body"><div class="schedule-title">AI Adoption, Innovation &amp; Opportunity</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">11:05–11:45</div><div class="schedule-body"><div class="schedule-title">AI in Marketing, Sales &amp; Revenue Growth</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">11:45–12:15</div><div class="schedule-body"><div class="schedule-title">Building Relationships in an AI-Driven World</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">9:00–10:00</div><div class="schedule-body"><div class="schedule-title">Registration, Coffee &amp; Executive Networking</div><div class="schedule-desc">Arrive, grab coffee, and meet your AI-powered attendee matches before the day begins.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">10:00–10:20</div><div class="schedule-body"><div class="schedule-title">Opening Keynote: The State of AI in Business</div><div class="schedule-desc">Where AI actually landed in 2026 — the year of agents — and what that means heading into 2027.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">10:20–11:05</div><div class="schedule-body"><div class="schedule-title">AI Adoption, Innovation &amp; Opportunity</div><div class="schedule-desc">What separates the organizations getting real value from the ones still running pilots.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">11:05–11:45</div><div class="schedule-body"><div class="schedule-title">AI in Marketing, Sales &amp; Revenue Growth</div><div class="schedule-desc">Lead generation, content, personalization, and the workflows moving revenue today.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">11:45–12:15</div><div class="schedule-body"><div class="schedule-title">Building Relationships in an AI-Driven World</div><div class="schedule-desc">Where trust, reputation, and human judgment still decide outcomes — and how to scale them.</div></div></div>
           <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">12:15–1:15</div><div class="schedule-body"><div class="schedule-title">Lunch &amp; Curated Networking</div><div class="schedule-desc">Catering is being finalized; this window is provisional.</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">1:15–2:00</div><div class="schedule-body"><div class="schedule-title">AI in Action: Live Demos &amp; Real Applications</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">2:00–2:45</div><div class="schedule-body"><div class="schedule-title">Enterprise AI: Implementation, Leadership &amp; ROI</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">2:45–3:00</div><div class="schedule-body"><div class="schedule-title">Networking Break</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">3:00–3:45</div><div class="schedule-body"><div class="schedule-title">Entrepreneurship &amp; Scaling in the AI Era</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">3:45–4:30</div><div class="schedule-body"><div class="schedule-title">Atlanta's AI Future: Executive Leadership Roundtable</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">4:30–5:00</div><div class="schedule-body"><div class="schedule-title">The 2027 Outlook &amp; Closing Remarks</div></div></div>
-          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">5:00–6:00</div><div class="schedule-body"><div class="schedule-title">Executive Networking Reception</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">1:15–2:00</div><div class="schedule-body"><div class="schedule-title">AI in Action: Live Demos &amp; Real Applications</div><div class="schedule-desc">Working systems on screen. Practical builds you can take back and use the next day.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">2:00–2:45</div><div class="schedule-body"><div class="schedule-title">Enterprise AI: Implementation, Leadership &amp; ROI</div><div class="schedule-desc">Governance, change management, and measuring returns when AI moves into production.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">2:45–3:00</div><div class="schedule-body"><div class="schedule-title">Networking Break</div><div class="schedule-desc">Reset, refill, and keep the hallway conversations going.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">3:00–3:45</div><div class="schedule-body"><div class="schedule-title">Entrepreneurship &amp; Scaling in the AI Era</div><div class="schedule-desc">Building and growing a company when the tooling changes every quarter.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">3:45–4:30</div><div class="schedule-body"><div class="schedule-title">Atlanta's AI Future: Executive Leadership Roundtable</div><div class="schedule-desc">City-level perspective on talent, capital, and what Atlanta needs to build next.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">4:30–5:00</div><div class="schedule-body"><div class="schedule-title">The 2027 Outlook &amp; Closing Remarks</div><div class="schedule-desc">The themes, technologies, and leadership priorities to plan around for the year ahead.</div></div></div>
+          <div class="schedule-row"><div class="schedule-time" style="color:var(--gold);">5:00–6:00</div><div class="schedule-body"><div class="schedule-title">Executive Networking Reception</div><div class="schedule-desc">Close the day with drinks, your recommended matches, speakers, and partners.</div></div></div>
         </div>
         <p style="font-size:.74rem;color:var(--mu);font-family:var(--fm);margin:.75rem 0 1.5rem;">Agenda, speakers, and session details are preliminary and subject to change.</p>
 
@@ -3903,7 +3924,7 @@ async function submitIntake(kind, P){
   if (!email || email.indexOf('@') < 1 || email.indexOf('.') < 0) { say('Please add a valid email address.', 'var(--red)'); return; }
 
   var payload = { firstName: first, lastName: last, email: email };
-  if (kind === 'sponsor') {
+  if (kind === 'sponsor' || kind === 'partner') {
     payload.company = v(P+'-company');
     var sel = document.getElementById(P+'-interest');
     payload.interest = (sel && sel.selectedIndex > 0) ? sel.value : '';
