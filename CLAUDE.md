@@ -63,11 +63,14 @@ pg-about, pg-register
 - Mobile hamburger at ≤900px
 
 ## Canonical Stats — NEVER CHANGE WITHOUT EXPLICIT INSTRUCTION
+(In-person and speaker counts were raised on organizer instruction, Oct 2026. The
+2025–2026 Founding Series blocks keep their own historical figures — 300+ attendees
+across 3 events, 20+ speakers — and must not be swept up in a global find/replace.)
 - Community Members: 500+
 - Events This Year: 5
-- Industry Speakers: 20+
+- Industry Speakers: 40+
 - Registrations: 800+
-- In-Person Attendees: 300+
+- In-Person Attendees: 1,000+
 - Organic Impressions: 108K+
 - Organic Growth: 100%
 - Exec Decision-Makers: 237
