@@ -219,7 +219,10 @@ reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
   $99 · General $149 · VIP Executive $249 · Corporate Team $499 for 4
 - **`SUMMIT_TICKETS_LIVE` gates everything.** Still `false`: GetNetworked shows the
   event as Private/Free with an RSVP request and no purchasable tiers. While false,
-  every tier reads "Not yet on sale" and all CTAs read "Join the Priority List".
+  every tier reads "Not yet on sale" and all CTAs read "RSVP for Atlanta AI Day",
+  matching GetNetworked, which still lists the event as a free RSVP with no
+  purchasable tiers. When tiers go live, flipping the flag switches CTAs to
+  "Get Your Tickets".
   Flip to `true` only after confirming a member of the public can actually buy.
 - Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
 
