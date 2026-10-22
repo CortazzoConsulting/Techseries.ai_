@@ -364,78 +364,104 @@ function welcomeEmailHTML(firstName) {
 
 function intakeEmailHTML(firstName, kind) {
   const isSpeaker = kind === 'speaker';
-  const headline = isSpeaker ? 'Thanks for applying to speak.' : 'Thanks for your interest in partnering.';
-  const body = isSpeaker
-    ? `We've received your application to speak at a TechSeries.ai event. Our team reviews every submission and will follow up with you directly about fit, format, and upcoming dates.`
-    : `We've received your sponsorship inquiry. Our team will follow up with you directly to walk through packages, availability, and what makes sense for your goals.`;
-  const nextLine = isSpeaker
-    ? 'If your topic fits an upcoming program, we&rsquo;ll reach out to talk through the session.'
-    : 'We&rsquo;ll be in touch with tiers, booth options, and lead-list details.';
+  const accent  = isSpeaker ? '#1a3aff' : '#c9a227';
+  const eyebrow = isSpeaker ? 'Application Received' : 'Inquiry Received';
+  const headline = isSpeaker ? 'You&rsquo;re on our radar.' : 'Let&rsquo;s build something together.';
+  const intro = isSpeaker
+    ? 'Thanks for applying to speak at Tech Series. We read every application ourselves &mdash; no auto-filter &mdash; and we&rsquo;ll follow up personally about fit, format, and which date makes sense.'
+    : 'Thanks for your interest in partnering with Tech Series. We&rsquo;ll follow up personally to walk through packages, availability, and what actually makes sense for your goals.';
+  const steps = isSpeaker
+    ? [['01','We review','Our team reads your application and looks at topic fit for upcoming programs.'],
+       ['02','We reach out','If there&rsquo;s a fit, we&rsquo;ll email you to talk through the session and format.'],
+       ['03','We lock it in','Confirmed speakers get promotion across the series, the site, and the recap.']]
+    : [['01','We review','Our team looks at your goals and which rooms put you in front of the right people.'],
+       ['02','We reach out','You get tiers, booth options, and what&rsquo;s still available &mdash; not a generic deck.'],
+       ['03','You go live','Logo on the flyer, booth staged, tickets issued, lead list delivered after.']];
+  const proof = isSpeaker
+    ? [['800+','Registrations'],['300+','In-Person'],['20+','Speakers']]
+    : [['800+','Registrations'],['300+','In-Person'],['108K+','Organic Reach']];
+
+  const stepRows = steps.map(function (st) {
+    return '<tr>'
+      + '<td width="44" valign="top" style="padding:0 0 18px;font-family:Courier New,Courier,monospace;font-size:12px;letter-spacing:2px;color:' + accent + ';">' + st[0] + '</td>'
+      + '<td valign="top" style="padding:0 0 18px;">'
+      +   '<div style="font-size:15px;font-weight:700;color:#ffffff;margin-bottom:3px;">' + st[1] + '</div>'
+      +   '<div style="font-size:13px;line-height:1.6;color:#8a8a99;">' + st[2] + '</div>'
+      + '</td></tr>';
+  }).join('');
+
+  const proofCells = proof.map(function (p) {
+    return '<td width="32%" align="center" style="padding:14px 6px;background:#111118;border:1px solid #1e1e2a;border-radius:8px;">'
+      + '<div style="font-size:22px;font-weight:900;color:#ffffff;">' + p[0] + '</div>'
+      + '<div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#6a6a7a;margin-top:3px;">' + p[1] + '</div></td>';
+  }).join('<td width="10">&nbsp;</td>');
+
+  const preheader = isSpeaker
+    ? 'We received your speaker application &mdash; here&rsquo;s what happens next.'
+    : 'We received your sponsorship inquiry &mdash; here&rsquo;s what happens next.';
 
   return `<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechSeries.ai</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>TechSeries.ai</title>
 </head>
-<body style="margin:0;padding:0;background:#0a0a0f;font-family:Arial,Helvetica,sans-serif;">
-  <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+<body style="margin:0;padding:0;background:#0a0a0f;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${preheader}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0a0a0f;">
+<tr><td align="center" style="padding:36px 16px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;font-family:Arial,Helvetica,sans-serif;">
 
-    <div style="text-align:center;margin-bottom:40px;">
-      <div style="font-size:32px;font-weight:900;color:#ffffff;letter-spacing:-1px;">
-        TECH<span style="color:#1a3aff;">SERIES</span>.AI
-      </div>
-      <div style="font-size:11px;color:#666;letter-spacing:3px;text-transform:uppercase;margin-top:6px;">
-        Atlanta's AI Business Event Series
-      </div>
-    </div>
+<tr><td align="center" style="padding-bottom:30px;">
+  <div style="font-size:27px;font-weight:900;color:#ffffff;letter-spacing:-.5px;">TECH<span style="color:#1a3aff;">SERIES</span>.AI</div>
+  <div style="font-family:Courier New,Courier,monospace;font-size:10px;color:#6a6a7a;letter-spacing:3px;text-transform:uppercase;margin-top:7px;">Atlanta&rsquo;s AI Business Event Series</div>
+</td></tr>
 
-    <div style="background:#111;border:1px solid #1a3aff33;border-radius:12px;padding:36px;margin-bottom:24px;">
-      <div style="font-size:11px;color:#1a3aff;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;">
-        ${isSpeaker ? 'Application Received' : 'Inquiry Received'}
-      </div>
-      <h1 style="color:#ffffff;font-size:26px;font-weight:900;margin:0 0 16px;">
-        ${headline}
-      </h1>
-      <p style="color:#888;font-size:15px;line-height:1.7;margin:0 0 20px;">
-        Hi ${firstName} &mdash; ${body}
-      </p>
-      <p style="color:#888;font-size:15px;line-height:1.7;margin:0 0 28px;">
-        ${nextLine} You can reply straight to this email if you'd like to add anything.
-      </p>
-      <a href="https://techseries.ai"
-         style="display:inline-block;background:#1a3aff;color:#ffffff;text-decoration:none;
-                padding:14px 28px;border-radius:6px;font-weight:700;font-size:14px;">
-        Explore TechSeries.ai &rarr;
-      </a>
-    </div>
+<tr><td style="background:#111118;border:1px solid ${accent}44;border-radius:14px;padding:34px 30px;">
+  <div style="font-family:Courier New,Courier,monospace;font-size:10px;color:${accent};letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">${eyebrow}</div>
+  <div style="font-size:27px;font-weight:900;color:#ffffff;line-height:1.2;margin-bottom:14px;">${headline}</div>
+  <div style="font-size:15px;line-height:1.75;color:#9a9aa8;">Hi ${firstName} &mdash; ${intro}</div>
+</td></tr>
 
-    <div style="background:#111;border:1px solid #c9a22733;border-radius:12px;padding:28px;margin-bottom:24px;">
-      <div style="font-size:11px;color:#c9a227;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;">
-        Year-End Flagship
-      </div>
-      <div style="font-size:20px;font-weight:900;color:#ffffff;margin-bottom:6px;">
-        Atlanta AI Day
-      </div>
-      <div style="font-size:13px;color:#888;">
-        The State of AI &mdash; Now &amp; Next<br>
-        Thursday, December 10, 2026 &middot; 9:00 AM&ndash;6:00 PM<br>
-        Life Time Work Sandy Springs &middot; Atlanta, GA
-      </div>
-    </div>
+<tr><td style="padding:28px 4px 8px;">
+  <div style="font-family:Courier New,Courier,monospace;font-size:10px;color:#6a6a7a;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">What happens next</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${stepRows}</table>
+</td></tr>
 
-    <div style="text-align:center;padding-top:24px;border-top:1px solid #1a1a2e;">
-      <p style="color:#444;font-size:12px;margin:0 0 8px;">
-        Powered by <a href="https://app.getnetworked.com/techseries.ai" style="color:#1a3aff;text-decoration:none;">Getnetworked</a>
-        &middot; Atlanta, GA
-      </p>
-      <p style="color:#333;font-size:11px;margin:0;">
-        You're receiving this because you submitted a form at techseries.ai.
-      </p>
-    </div>
+<tr><td style="padding:6px 0 24px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>${proofCells}</tr></table>
+</td></tr>
 
+<tr><td style="background:#111118;border:1px solid #c9a22744;border-radius:14px;padding:26px 30px;">
+  <div style="font-family:Courier New,Courier,monospace;font-size:10px;color:#c9a227;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;">&#9733; Year-End Flagship</div>
+  <div style="font-size:22px;font-weight:900;color:#ffffff;margin-bottom:4px;">Atlanta AI Day</div>
+  <div style="font-size:14px;color:#c9a227;margin-bottom:12px;">The State of AI &mdash; Now &amp; Next</div>
+  <div style="font-size:13px;line-height:1.75;color:#8a8a99;">
+    Thursday, December 10, 2026 &middot; 9:00 AM&ndash;6:00 PM<br>
+    Life Time Work Sandy Springs &middot; Atlanta, GA<br>
+    One city. Every AI community. One day.
   </div>
+  <div style="margin-top:18px;">
+    <a href="https://techseries.ai/atlanta-ai-day/" style="display:inline-block;background:#c9a227;color:#0a0a0f;text-decoration:none;padding:12px 26px;border-radius:6px;font-weight:700;font-size:13px;">See the full day &rarr;</a>
+  </div>
+</td></tr>
+
+<tr><td align="center" style="padding:28px 10px 0;">
+  <div style="font-size:13px;line-height:1.7;color:#6a6a7a;">Questions? Just reply to this email &mdash; it reaches us directly.</div>
+</td></tr>
+
+<tr><td style="padding-top:22px;border-top:1px solid #1a1a2e;">
+  <div align="center" style="font-family:Courier New,Courier,monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#4a4a58;padding-top:18px;">
+    Powered by <a href="https://app.getnetworked.com/techseries.ai" style="color:#1a3aff;text-decoration:none;">Getnetworked</a> &middot; Atlanta, GA
+  </div>
+  <div align="center" style="font-size:11px;color:#3a3a46;margin-top:8px;">You received this because you submitted a form at techseries.ai.</div>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
 </body>
 </html>`;
 }
