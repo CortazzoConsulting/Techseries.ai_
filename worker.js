@@ -391,11 +391,8 @@ function intakeEmailHTML(firstName, kind) {
     : [['01','We review','Our team looks at your goals and which rooms put you in front of the right people.'],
        ['02','We reach out','You get tiers, booth options, and what&rsquo;s still available &mdash; not a generic deck.'],
        ['03','You go live','Logo on the flyer, booth staged, tickets issued, lead list delivered after.']];
-  const proof = isSpeaker
-    ? [['800+','Registrations'],['300+','In-Person'],['20+','Speakers']]
-    : isPartner
-    ? [['500+','Community'],['300+','In-Person'],['30+','Organizations']]
-    : [['800+','Registrations'],['300+','In-Person'],['108K+','Organic Reach']];
+  // Stat tiles in every confirmation email.
+  const proof = [['1,000+','In-Person'],['40+','Speakers']];
   const stepRows = steps.map(function (st) {
     return '<tr>'
       + '<td width="44" valign="top" style="padding:0 0 18px;font-family:Courier New,Courier,monospace;font-size:12px;letter-spacing:2px;color:' + accent + ';">' + st[0] + '</td>'
@@ -406,7 +403,7 @@ function intakeEmailHTML(firstName, kind) {
   }).join('');
 
   const proofCells = proof.map(function (p) {
-    return '<td width="32%" align="center" style="padding:14px 6px;background:#111118;border:1px solid #1e1e2a;border-radius:8px;">'
+    return '<td width="49%" align="center" style="padding:16px 6px;background:#111118;border:1px solid #1e1e2a;border-radius:8px;">'
       + '<div style="font-size:22px;font-weight:900;color:#ffffff;">' + p[0] + '</div>'
       + '<div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#6a6a7a;margin-top:3px;">' + p[1] + '</div></td>';
   }).join('<td width="10">&nbsp;</td>');
