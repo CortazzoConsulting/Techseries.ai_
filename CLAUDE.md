@@ -16,11 +16,13 @@ rewrites — clean URLs need a real directory with an index.html.
 - `worker.js` — Cloudflare Worker for email subscriptions via Resend
 - `CNAME` — custom domain for Cloudflare Pages
 - `og-default.jpg` — 1200x630 site-wide social card (home/all SPA routes)
-- `og-summit.jpg` — 1200x630 social card for the summit
+- `og-aiday.jpg` — 1200x630 social card for Atlanta AI Day
+- `og-summit.jpg` — superseded card from the Executive Summit branding
   **Social images must be real files, never base64 data URIs** — LinkedIn, Facebook
   and iMessage cannot fetch a data: URI, so a data-URI og:image shows no preview.
-- `executive-summit/index.html` — static entry point carrying the summit's title,
-  OG/Twitter tags and Event schema, then handing off to the SPA via /?p=executive-summit
+- `atlanta-ai-day/index.html` — static entry point with the event's title, OG/Twitter
+  tags and Event schema, handing off to the SPA via /?p=atlanta-ai-day
+- `executive-summit/index.html` — kept so old links survive; forwards to /atlanta-ai-day/
 
 ## Deployment
 ```bash
@@ -80,7 +82,7 @@ pg-about, pg-register
 | The Economics of AI | Jun 18 | 5:30–7:30 PM | `--green` | Completed |
 | Building AI-Ready Teams | Aug 20 | 5:00–7:30 PM | `--orange` | Completed |
 | AI in Real Estate: From Leads to Deals | Oct 22 | 5:00–8:30 PM | `--red` | CURRENT MAIN EVENT (ticketed) |
-| Executive Summit 2027 | Dec 9 | 9:00 AM–6:00 PM EST | `--gold` | Flagship, ticketed |
+| Atlanta AI Day: The State of AI — Now & Next | Dec 10 | 9:00 AM–6:00 PM | `--gold` | YEAR-END FLAGSHIP (ticketed) |
 | TechSeries AM | Monthly | 7:30–9:00 AM | `#a78bfa` | Recurring |
 
 ## Getnetworked URLs
@@ -91,7 +93,9 @@ pg-about, pg-register
 - Oct 22: https://app.getnetworked.com/event/-autonomous-business-systems-from-automation-to-ai-agents
   (The event was renamed in place to AI in Real Estate — the old slug is still the
   live URL and matches the flyer QR code. Don't "fix" it to a real-estate slug.)
-- Dec 9:  https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027
+- Dec 10: https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027
+  (Renamed in place to Atlanta AI Day — the old slug is still the live URL and matches
+  the flyer QR code. Don't "fix" it, exactly like the Oct 22 event.)
 
 ## Past Events
 - **pg-past-1** — Oct 30, 2025 · Responsible AI & Best Practices
@@ -152,6 +156,8 @@ ethan@techseries.ai · (480) 268-3484 · moderates all events
 - DMARC is `p=quarantine` with relaxed alignment, which those records satisfy.
   Don't move the sender to a domain that isn't verified — mail will be spam-filed.
 - Welcome email fires automatically on subscribe
+- `RESEND_API_KEY` **is set and email is working** (verified Oct 21, 2026 — /subscribe,
+  /speaker and /sponsor all return real Resend message ids).
 - **The Resend API key is a Cloudflare Worker secret named `RESEND_API_KEY`.**
   Never hardcode it in `worker.js` or write it into this file — this repo is public.
   Set or rotate it with: `wrangler secret put RESEND_API_KEY`
@@ -203,26 +209,33 @@ Sponsor inquiries stay as an internal form emailing ethan@techseries.ai.
 9. Update overall site stats if needed
 
 
-## Executive Summit 2027 — December 9, 2026
-Flagship full-day summit: "The State of AI in Business: 2027 Outlook".
-Page: `pg-ev-summit`, also reachable at techseries.ai/executive-summit/ via the
-static entry point `executive-summit/index.html` (GitHub Pages has no edge rewrites).
-- 9:00 AM–6:00 PM EST · main program 10:00–5:00 · reception 5:00–6:00 · Atlanta, venue TBA
-- Tickets (GetNetworked is the only checkout): Founding Community $79 (Oct 13–23) ·
-  Early Bird $99 (Oct 24–Nov 6) · General $149 (Nov 7–Dec 9) · VIP Executive $249
-  (Oct 13–Dec 7) · Corporate Team $499 for 4 (Oct 13–Dec 4)
-- **`SUMMIT_TICKETS_LIVE` gates everything.** It is `false` until the tiers are
-  actually live and purchasable in GetNetworked. While false, every tier shows
-  "Not yet on sale" (no dates promised) and all CTAs read "Join the Priority List"
-  pointing at the GetNetworked RSVP. Flip it to `true` only after confirming
-  purchase works; the per-tier data-start/data-end windows then drive
-  Coming soon / Available / Sales ended. Never "sold out" — only GetNetworked knows.
-- Sponsorship inquiries use `sponsorInquiry()`, which validates and opens a prefilled
-  email. There is no backend: the Worker's email has been down since RESEND_API_KEY
-  was never set. Do not reintroduce a form that posts nowhere.
+## Atlanta AI Day — Thursday, December 10, 2026
+Year-end flagship: "The State of AI — Now & Next". Tagline: one city, every AI
+community, one day. Page: `pg-ev-summit` (id kept; only the branding changed),
+reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
+- 9:00 AM–6:00 PM · **Life Time Work Sandy Springs — venue is CONFIRMED**, not TBA
+- Built in blocks with real breaks, not back-to-back sessions
+- Tickets (GetNetworked is the only checkout): Founding Community $79 · Early Bird
+  $99 · General $149 · VIP Executive $249 · Corporate Team $499 for 4
+- **`SUMMIT_TICKETS_LIVE` gates everything.** Still `false`: GetNetworked shows the
+  event as Private/Free with an RSVP request and no purchasable tiers. While false,
+  every tier reads "Not yet on sale" and all CTAs read "Join the Priority List".
+  Flip to `true` only after confirming a member of the public can actually buy.
 - Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
 
-### Publication rules for the Summit — do not break these
+## Intake forms — speaker & sponsor
+Real forms, not mailto. `submitIntake(kind)` in `index.html` POSTs JSON to the Worker:
+- `POST /speaker` — firstName, lastName, email
+- `POST /sponsor` — plus company, interest, message
+Both send a TechSeries-branded confirmation to the applicant (`intakeEmailHTML`) and a
+notification to ethan@techseries.ai with `reply_to` set to the applicant. Submitted
+values are HTML-escaped before entering the notification email.
+The UI validates first name and email, disables the button while sending, hides the
+inputs on success, and on failure shows the server's reason plus a mailto fallback.
+**Never replace these with a form that posts nowhere** — the old sponsors-page form
+faked a success message while discarding submissions.
+
+### Publication rules for Atlanta AI Day — do not break these
 1. **No community partner or speaker may be named, logo'd, or hinted at** anywhere —
    page copy, metadata, structured data, or source — until the organizer approves
    that specific announcement in writing. `SUMMIT_PARTNERS` ships empty and the
@@ -230,9 +243,10 @@ static entry point `executive-summit/index.html` (GitHub Pages has no edge rewri
 2. Speakers show "Speaker Announcements Coming Soon" until confirmed.
 3. No attendance projections. Internal targets (200–300 attendees, 6–8 partners,
    12–18 speakers) are planning figures and must never appear publicly.
-4. Venue stays "announcing soon" until the booking is confirmed.
+4. Venue is confirmed: Life Time Work Sandy Springs. (Was TBA until Oct 2026.)
 5. Don't promise catering, VIP perks, or sponsor activations before they're confirmed.
 6. Registration/payment stays on GetNetworked — never add a second checkout.
-7. Summit changes are not deployed without the organizer's explicit approval.
+7. Atlanta AI Day changes are deployed normally now; the pre-launch approval gate
+   applied to the original summit build.
 8. No unverified attendance or speaker counts in copy **or artwork**. The supplied
    summit flyer's "1,000+ attendees · 30+ speakers" line was painted out before use.
