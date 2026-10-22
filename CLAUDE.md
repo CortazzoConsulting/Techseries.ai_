@@ -320,3 +320,12 @@ faked a success message while discarding submissions.
    applied to the original summit build.
 8. No unverified attendance or speaker counts in copy **or artwork**. The supplied
    summit flyer's "1,000+ attendees · 30+ speakers" line was painted out before use.
+9. **Artwork carries QR codes — re-check them whenever a GetNetworked slug changes.**
+   When the Dec 10 slug moved to `/event/atlanta-ai-day` (Oct 22, 2026), the AI Day
+   hero banner, the series/sidebar flyer and `og-aiday.jpg` were all still encoding
+   the dead old URL. The QR in each was regenerated and composited back in; all three
+   now decode to the new link. Past-event flyers keep their historical QR codes
+   (some point at the retired `app.net-worked.ai` domain) — leave those alone.
+   Decode a QR with CoreImage's `CIDetectorTypeQRCode`; `zbarimg`/PIL are not
+   installed on this machine, and a flyer embedded at 800px/q70 can blur its QR
+   past the point of scanning, so verify after re-encoding.
