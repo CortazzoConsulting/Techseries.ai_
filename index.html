@@ -50,6 +50,9 @@ body{padding-top:var(--tb);}
 .ev-hero-actions button:hover{background:rgba(201,162,39,.18);border-color:var(--gold);}
 .ev-hero-actions .eha-sub{display:block;font-family:var(--fb);font-size:.68rem;letter-spacing:0;text-transform:none;color:var(--mu);margin-top:3px;}
 @media(max-width:1100px){.ev-hero-actions{display:none;}}
+/* the hero tag pill is full-width; stop it short of the corner actions so the
+   two never overlap. Scoped to this page — other event heroes keep full width. */
+@media(min-width:1101px){#pg-ev-summit .ev-tag{max-width:calc(100% - 262px);}}
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:600;display:flex;align-items:center;justify-content:center;gap:.55rem;padding:0 1rem;cursor:pointer;background:linear-gradient(90deg,rgba(201,162,39,.22),rgba(201,162,39,.1));border-bottom:1px solid rgba(201,162,39,.35);white-space:nowrap;overflow:hidden;}
 .topbar b{font-family:var(--fm);font-size:clamp(.5rem,1.1vw,.62rem);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .topbar span{font-family:var(--fm);font-size:clamp(.5rem,1.1vw,.62rem);letter-spacing:.08em;text-transform:uppercase;color:var(--wht);text-decoration:underline;flex:0 0 auto;}
