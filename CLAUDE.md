@@ -129,9 +129,12 @@ across 3 events, 20+ speakers — and must not be swept up in a global find/repl
 - Oct 22: https://app.getnetworked.com/event/-autonomous-business-systems-from-automation-to-ai-agents
   (The event was renamed in place to AI in Real Estate — the old slug is still the
   live URL and matches the flyer QR code. Don't "fix" it to a real-estate slug.)
-- Dec 10: https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027
-  (Renamed in place to Atlanta AI Day — the old slug is still the live URL and matches
-  the flyer QR code. Don't "fix" it, exactly like the Oct 22 event.)
+- Dec 10: https://app.getnetworked.com/event/atlanta-ai-day
+  (The slug was changed on GetNetworked on Oct 22, 2026 — the organizer supplied the
+  new link. The old `-executive-summit-the-state-of-ai-in-business-2027` slug is now
+  **dead** ("No Events Found"), so any flyer QR code printed against it no longer
+  resolves. Every CTA carries `?r=aaahoi`, the host's referral code, which the new
+  slug accepts.)
 
 ## Past Events
 - **pg-past-1** — Oct 30, 2025 · Responsible AI & Best Practices
@@ -254,8 +257,9 @@ reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
 - Built in blocks with real breaks, not back-to-back sessions
 - Tickets (GetNetworked is the only checkout): Founding Community $79 · Early Bird
   $99 · General $149 · VIP Executive $249 · Corporate Team $499 for 4
-- **`SUMMIT_TICKETS_LIVE` gates everything.** Still `false`: GetNetworked shows the
-  event as Private/Free with an RSVP request and no purchasable tiers. While false,
+- **`SUMMIT_TICKETS_LIVE` gates everything.** Still `false`: GetNetworked now lists
+  the event as Public (changed Oct 22, 2026) but it is still Free with an RSVP
+  request and no purchasable tiers — public ≠ on sale. While false,
   every tier reads "Not yet on sale" and all CTAs read "RSVP for Atlanta AI Day",
   matching GetNetworked, which still lists the event as a free RSVP with no
   purchasable tiers. When tiers go live, flipping the flag switches CTAs to
