@@ -54,6 +54,15 @@ from it, so **a passing date no longer needs a manual edit**.
 - When the last event ends, the countdown reads "2027 season announcing soon".
 - Adding an event = one entry in `TS_EVENTS` plus `data-ts-event` on its cards.
 
+## Staged content — `data-ts-reveal`
+An element with `data-ts-reveal="<event id>"` and `hidden` stays hidden until that
+event's end time passes, then appears on its own. Used for the Oct 22 recap card so
+the page could ship before the event without publishing it early.
+`pg-past-oct` carries only verifiable facts — speakers, schedule, partners, topics.
+The attendance numbers and photo gallery are empty blocks marked
+`data-ts-filled="no"` and `hidden`; fill them and flip the flag, so nothing
+unverified can render by accident.
+
 ## Speaker directory
 `pg-speakers` has search + per-event filter chips over the 27 `.spk-full` cards.
 Chips are derived from each card's `.spk-ev-tag` at load, so a new speaker shows up
@@ -69,12 +78,12 @@ Instagram: https://www.instagram.com/techseries.ai/ (footer, team links, og:see_
 - Nav map in the script block maps page IDs to nav link IDs
 - CRITICAL: every `go('x')` call must have a matching `id="pg-x"` page div
 
-## All 22 Pages
+## All 23 Pages
 pg-home, pg-series, pg-ev-april, pg-ev-june, pg-ev-august,
 pg-ev-october, pg-ev-summit, pg-ev-am, pg-past, pg-past-1,
 pg-past-2, pg-past-3, pg-past-4, pg-past-5, pg-past-aug,
 pg-speakers, pg-team, pg-sponsors, pg-community, pg-faq,
-pg-about, pg-register
+pg-about, pg-register, pg-past-oct
 
 ## Brand
 - Fonts: Bebas Neue (display), DM Sans (body), DM Mono (mono)
