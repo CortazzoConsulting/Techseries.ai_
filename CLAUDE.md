@@ -42,6 +42,21 @@ If Workers Builds is ever disconnected, the Worker must be deployed by hand
 (dashboard -> Edit code -> paste -> Deploy) and will otherwise silently keep
 running old code while the repo moves ahead.
 
+## Event schedule engine — `TS_EVENTS`
+Dates live in one array in the script block. The countdown, the "Next Event"
+label, the home urgency line, and the completed / "Happening now" badges all read
+from it, so **a passing date no longer needs a manual edit**.
+- Each dated card carries `data-ts-event="<id>"`; `tsAgeCards()` dims it, flips the
+  badge to "✅ Completed" and the arrow to a check once the end time passes, and
+  shows a live badge while the event is running.
+- The badge selector covers `.tl-tag`, `.pe-badge` and `.tba-badge` — timeline rows
+  and series cards use different ones.
+- When the last event ends, the countdown reads "2027 season announcing soon".
+- Adding an event = one entry in `TS_EVENTS` plus `data-ts-event` on its cards.
+
+## Social
+Instagram: https://www.instagram.com/techseries.ai/ (footer, team links, og:see_also)
+
 ## Navigation System
 - All pages: `<div id="pg-{id}" class="pg">`
 - Navigate with: `go('id')` in JS — `go()` prepends `pg-` to find the element
