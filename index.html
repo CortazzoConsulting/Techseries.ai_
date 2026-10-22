@@ -2191,7 +2191,7 @@ nav{animation:navSlideIn .45s ease both;}
     </div>
   </div>
 </div>
-<div id="pg-past-oct" class="pg">
+<div id="pg-past-oct" class="pg" data-ts-reveal="ev-october">
   <section class="s" style="padding-top:8rem;padding-bottom:6rem;">
     <button class="ev-back" style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);background:none;border:none;cursor:pointer;margin-bottom:2rem;padding:0;" onclick="go('past')">← Back to Past Events</button>
     <div class="pe-badge" style="color:var(--green);border-color:rgba(0,196,114,.3);margin-bottom:1rem;">✓ Completed · October 22, 2026</div>
@@ -3759,6 +3759,14 @@ nav{animation:navSlideIn .45s ease both;}
 
 <script>
 function go(id){
+  // A recap page can sit in the repo before its event happens. Until the event's
+  // end time passes, send visitors to the live event page instead, so nothing
+  // ever claims an event already took place.
+  const staged=document.getElementById('pg-'+id);
+  if(staged && staged.hasAttribute('data-ts-reveal') && typeof tsStagedReady==='function'
+     && !tsStagedReady(staged.getAttribute('data-ts-reveal'))){
+    id = staged.getAttribute('data-ts-reveal');
+  }
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   const pg=document.getElementById('pg-'+id);
   if(pg) pg.classList.add('on');
@@ -3947,12 +3955,17 @@ function tsAgeCards(now){
 }
 /* Content that should only appear after an event finishes — e.g. its recap card.
    Keeps the recap staged in the repo without publishing it early. */
+function tsStagedReady(evId){
+  var now = new Date();
+  for (var i = 0; i < TS_EVENTS.length; i++) if (TS_EVENTS[i].id === evId) return tsState(TS_EVENTS[i], now) === 'past';
+  return true;
+}
 function tsRevealPast(now){
   var els = document.querySelectorAll('[data-ts-reveal]');
   for (var i = 0; i < els.length; i++){
     var el = els[i], id = el.getAttribute('data-ts-reveal'), ev = null;
     for (var j = 0; j < TS_EVENTS.length; j++) if (TS_EVENTS[j].id === id) ev = TS_EVENTS[j];
-    if (ev && tsState(ev, now) === 'past') el.hidden = false;
+    if (ev && tsState(ev, now) === 'past' && !el.classList.contains('pg')) el.hidden = false;
   }
 }
 function tsSyncHero(now){

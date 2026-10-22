@@ -56,8 +56,11 @@ from it, so **a passing date no longer needs a manual edit**.
 
 ## Staged content — `data-ts-reveal`
 An element with `data-ts-reveal="<event id>"` and `hidden` stays hidden until that
-event's end time passes, then appears on its own. Used for the Oct 22 recap card so
-the page could ship before the event without publishing it early.
+event's end time passes, then appears on its own. Used for the Oct 22 recap so the page
+could ship before the event without publishing it early. The `.pg` page itself also
+carries the attribute, and `go()` refuses to open it until the event has ended —
+visitors are sent to the live event page instead, so no URL or console call can
+surface a page claiming an event already happened.
 `pg-past-oct` carries only verifiable facts — speakers, schedule, partners, topics.
 The attendance numbers and photo gallery are empty blocks marked
 `data-ts-filled="no"` and `hidden`; fill them and flip the flag, so nothing
