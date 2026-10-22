@@ -170,8 +170,9 @@ through GetNetworked.
   6:00–7:30 main program → 7:30–8:30 networking reception
 - Food: light bites, drinks, charcuterie
 - Tickets: **General Admission $30 (current)** · VIP Connect $49 (limited) ·
-  Team Pass $75 (4 attendees). Early Bird $20 closed Oct 12 — its tier card is
-  dimmed and marked "Sales ended" rather than removed.
+  Team Pass $75 (4 attendees). Early Bird $20 closed Oct 12 and its tier card was
+  removed entirely on Oct 22 — a stale search-index copy was still surfacing the
+  expired promo. Nothing on the October page mentions Early Bird now.
 - When a price window closes, update: home urgency line, home hero card ticket row,
   series card blurb, event hero meta, the tier cards, the sidebar card rows and
   footnote, and **both** pricing FAQs (there are two).
@@ -261,6 +262,14 @@ reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
   "Get Your Tickets".
   Flip to `true` only after confirming a member of the public can actually buy.
 - Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
+
+## Mobile
+Audited at 320px and 375px across all 22 reachable pages: no horizontal overflow,
+no text under 10.5px, no tap target under 36px. The rules live in one
+`@media(max-width:900px)` block near the topbar styles — it raises the small-label
+floor to ~.7rem and gives controls a thumb-sized box. Desktop sizing is untouched.
+**There are two `.mob-nav` rule blocks** (the later one wins). Both must offset by
+`var(--tb)` or the dropdown opens underneath the fixed nav.
 
 ## Site-wide top banner
 `.topbar` is fixed above the nav on every page, promoting Atlanta AI Day. It is

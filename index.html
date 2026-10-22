@@ -61,6 +61,25 @@ body{padding-top:var(--tb);}
 .topbar span{font-family:var(--fm);font-size:clamp(.5rem,1.1vw,.62rem);letter-spacing:.08em;text-transform:uppercase;color:var(--wht);text-decoration:underline;flex:0 0 auto;}
 .topbar .tb-long{display:inline;}
 @media(max-width:1100px){.topbar .tb-long{display:none;}}
+/* ── Mobile readability & touch targets ──────────────────────────────────────
+   Audited at 375px: label text sat at 9.3–10.4px and 34 controls were under
+   36px tall. Raise the small-text floor to ~11px and give every control a
+   thumb-sized hit area. Mobile only — desktop sizing is unchanged.            */
+@media(max-width:900px){
+  .cd-lbl,.ev-tag,.pe-badge,.schedule-time,.spk-ev-tag,.tba-badge,.tk-status,.tl-tag{font-size:.7rem !important;}
+  .spk-chip{font-size:.68rem !important;}
+  .pg [style*="font-size:.5"],.pg [style*="font-size:.6"]{font-size:.7rem !important;}
+  .bp,.bo{min-height:44px;}
+  .ev-back{min-height:44px;display:inline-flex;align-items:center;}
+  .tlink{display:inline-flex;align-items:center;min-height:44px;}
+  .spk-chip{min-height:36px;display:inline-flex;align-items:center;}
+  .faq-q{min-height:44px;display:flex;align-items:center;}
+  .pg p a,.pg .tl-sub a,.pg .pe-stats a,.pg .faq-a a,.pg .pe-stats span[onclick]{display:inline-block;padding:.4rem 0;}
+  /* remaining inline links/buttons: give them a thumb-sized box without
+     disturbing full-width block anchors or gallery images */
+  .pg a:not(.gallery-img):not([style*="display:block"]):not(.bp):not(.bo),
+  .pg button:not(.bp):not(.bo):not(.ev-back){display:inline-flex;align-items:center;min-height:40px;}
+}
 @media(max-width:900px){:root{--tb:32px;}.topbar{padding:0 .75rem;gap:.4rem;}}
 .pg.on{display:block;}
 @keyframes pgIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
@@ -394,7 +413,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden;}
 .ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .ham.open span:nth-child(2){opacity:0;}
 .ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mob-nav{display:none;position:fixed;top:66px;left:0;right:0;background:rgba(8,8,14,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bo);z-index:500;flex-direction:column;padding:0 1.5rem 1.5rem;}
+.mob-nav{display:none;position:fixed;top:calc(66px + var(--tb));left:0;right:0;background:rgba(8,8,14,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bo);z-index:500;flex-direction:column;padding:0 1.5rem 1.5rem;}
 .mob-nav.open{display:flex;}
 .mob-nav a{font-family:var(--fm);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);padding:.9rem 0;border-bottom:1px solid var(--bo);cursor:none;transition:color .15s;}
 .mob-nav a:last-child{border-bottom:none;color:var(--blue);font-weight:700;}
@@ -1522,12 +1541,7 @@ nav{animation:navSlideIn .45s ease both;}
 
         <div class="ev-sect" style="margin-top:2rem;">Tickets</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;">
-          <div style="padding:.85rem;border:1px solid var(--bo);border-radius:8px;opacity:.5;">
-            <div style="display:flex;justify-content:space-between;gap:1rem;align-items:baseline;"><div style="font-size:.86rem;font-weight:600;color:var(--wht);">Early Bird</div><div style="font-family:var(--fd);font-size:1.3rem;color:var(--green);">$20</div></div>
-            <div style="font-size:.72rem;color:var(--mu);margin-bottom:.3rem;">Sales ended October 12</div>
-            <div style="font-size:.74rem;color:var(--mu);line-height:1.6;">Full program · Curated networking · AI-powered attendee matches · Partner showcase · Light bites, drinks &amp; charcuterie · Networking reception</div>
-          </div>
-          <div style="padding:.85rem;border:1px solid rgba(0,196,114,.35);border-radius:8px;">
+                    <div style="padding:.85rem;border:1px solid rgba(0,196,114,.35);border-radius:8px;">
             <div style="display:flex;justify-content:space-between;gap:1rem;align-items:baseline;"><div style="font-size:.86rem;font-weight:600;color:var(--wht);">General Admission</div><div style="font-family:var(--fd);font-size:1.3rem;color:var(--wht);">$30</div></div>
             <div style="font-size:.72rem;color:var(--green);margin-bottom:.3rem;">Available now</div>
             <div style="font-size:.74rem;color:var(--mu);line-height:1.6;">The full Tech Series experience — curated networking, AI-powered matches, food, drinks, partner showcase, and networking reception.</div>
@@ -2955,7 +2969,7 @@ nav{animation:navSlideIn .45s ease both;}
         <div style="border:1px solid var(--bo);border-radius:10px;padding:0 1.25rem;">
         <div class="faq-item" onclick="toggleFAQ(this)">
           <div class="faq-q">Is this event free to attend?<span class="faq-icon">+</span></div>
-          <div class="faq-a">Events are ticketed. For October 22 (AI in Real Estate): General Admission $30, VIP Connect $49 (limited), and a Team Pass for 4 attendees at $75. Early Bird pricing closed on October 12. Tickets include the full program, curated networking, AI-powered attendee matches, light bites, drinks, and the networking reception. Atlanta AI Day on December 10 is ticketed separately.</div>
+          <div class="faq-a">Events are ticketed. For October 22 (AI in Real Estate): General Admission $30, VIP Connect $49 (limited), and a Team Pass for 4 attendees at $75. Tickets include the full program, curated networking, AI-powered attendee matches, light bites, drinks, and the networking reception. Atlanta AI Day on December 10 is ticketed separately.</div>
         </div>
         <div class="faq-item" onclick="toggleFAQ(this)">
           <div class="faq-q">Who should attend TechSeries.ai events?<span class="faq-icon">+</span></div>
@@ -3685,7 +3699,7 @@ nav{animation:navSlideIn .45s ease both;}
       <div id="faq-wrap" style="max-width:700px;">
         <div class="faq-item" onclick="toggleFAQ(this)">
           <div class="faq-q">How much do events cost?<span class="faq-icon">+</span></div>
-          <div class="faq-a">For October 22 (AI in Real Estate): General Admission $30, VIP Connect $49, and a Team Pass for 4 at $75. Early Bird pricing closed on October 12. Tickets include the full program, curated networking, AI-powered attendee matches, food, drinks, and the networking reception. Atlanta AI Day on December 10 is ticketed separately.</div>
+          <div class="faq-a">For October 22 (AI in Real Estate): General Admission $30, VIP Connect $49, and a Team Pass for 4 at $75. Tickets include the full program, curated networking, AI-powered attendee matches, food, drinks, and the networking reception. Atlanta AI Day on December 10 is ticketed separately.</div>
         </div>
         <div class="faq-item" onclick="toggleFAQ(this)">
           <div class="faq-q">Who should attend TechSeries.ai events?<span class="faq-icon">+</span></div>
