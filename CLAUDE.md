@@ -223,8 +223,18 @@ reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
   Flip to `true` only after confirming a member of the public can actually buy.
 - Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
 
+## Site-wide top banner
+`.topbar` is fixed above the nav on every page, promoting Atlanta AI Day. It is
+offset-safe: `body{padding-top:var(--tb)}` and `nav{top:var(--tb)}` move together,
+so nav-to-content spacing is unchanged. `--tb` is 34px desktop / 32px mobile, where
+the `.tb-long` date+venue span is hidden to keep it on one line.
+
 ## Intake forms — speaker & sponsor
-Real forms, not mailto. `submitIntake(kind)` in `index.html` POSTs JSON to the Worker:
+Real forms, not mailto. `submitIntake(kind, P)` in `index.html` POSTs JSON to the
+Worker. `P` is the element-id prefix, so the same form can appear more than once:
+`spk` (Atlanta AI Day page), `hspk` (home page), `spo` (sponsor). Every instance
+needs its own `{P}-form`, `{P}-first`, `{P}-last`, `{P}-email`, `{P}-btn`,
+`{P}-status` — duplicate ids will break both copies.
 - `POST /speaker` — firstName, lastName, email
 - `POST /sponsor` — plus company, interest, message
 Both send a TechSeries-branded confirmation to the applicant (`intakeEmailHTML`) and a

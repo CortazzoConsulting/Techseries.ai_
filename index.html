@@ -31,7 +31,8 @@
 <title>TechSeries.ai — Atlanta AI Business Events 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
+:root{--tb:34px;
+
   --blk:#0a0a0f;--wht:#fafaf8;
   --blue:#1a3aff;--green:#00c472;--orange:#ff5a1f;--red:#e8192c;--gold:#c9a227;
   --mu:rgba(250,250,248,0.5);--bo:rgba(250,250,248,0.1);--ca:rgba(250,250,248,0.04);
@@ -43,11 +44,17 @@ body{background:var(--blk);color:var(--wht);font-family:var(--fb);font-size:16px
 a{color:inherit;text-decoration:none;}
 img{display:block;}
 .pg{display:none;min-height:100vh;animation:pgIn 0.35s ease both;}
+body{padding-top:var(--tb);}
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:600;display:flex;align-items:center;justify-content:center;gap:.55rem;padding:0 1rem;cursor:pointer;background:linear-gradient(90deg,rgba(201,162,39,.22),rgba(201,162,39,.1));border-bottom:1px solid rgba(201,162,39,.35);white-space:nowrap;overflow:hidden;}
+.topbar b{font-family:var(--fm);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.topbar span{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wht);text-decoration:underline;}
+.topbar .tb-long{display:inline;}
+@media(max-width:900px){:root{--tb:32px;}.topbar b{font-size:.56rem;letter-spacing:.08em;}.topbar span{font-size:.56rem;letter-spacing:.06em;}.topbar .tb-long{display:none;}}
 .pg.on{display:block;}
 @keyframes pgIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:66px;background:rgba(10,10,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bo);}
+nav{position:fixed;top:var(--tb);left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:66px;background:rgba(10,10,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bo);}
 .nleft{display:flex;align-items:center;gap:1.1rem;}
 .wm{font-family:var(--fd);font-size:1.55rem;letter-spacing:.04em;cursor:pointer;user-select:none;}
 .wm span{color:var(--blue);}
@@ -319,7 +326,7 @@ footer{padding:2.75rem 2.5rem;border-top:1px solid var(--bo);display:grid;grid-t
 .ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .ham.open span:nth-child(2){opacity:0;}
 .ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mob-nav{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(10,10,15,.98);border-bottom:1px solid var(--bo);z-index:400;padding:1.25rem 1.5rem 2rem;flex-direction:column;gap:0;}
+.mob-nav{display:none;position:fixed;top:calc(62px + var(--tb));left:0;right:0;background:rgba(10,10,15,.98);border-bottom:1px solid var(--bo);z-index:400;padding:1.25rem 1.5rem 2rem;flex-direction:column;gap:0;}
 .mob-nav.open{display:flex;}
 .mob-nav a{font-size:.88rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mu);padding:.8rem 0;border-bottom:1px solid var(--bo);cursor:pointer;transition:color .15s;font-family:var(--fm);}
 .mob-nav a:last-child{border-bottom:none;}
@@ -721,6 +728,10 @@ nav{animation:navSlideIn .45s ease both;}
 <!-- ╔══════════════════╗
      ║      NAV         ║
      ╚══════════════════╝ -->
+<div class="topbar" onclick="go('ev-summit')">
+  <b>Atlanta AI Day<span class="tb-long"> · Dec 10, 2026 · Life Time Work Sandy Springs</span></b>
+  <span>Explore →</span>
+</div>
 <nav>
   <div class="nleft">
     <div class="wm" onclick="go('home')">TECH<span>SERIES</span>.AI</div><div class="nav-powered-side"><span class="nav-divider">|</span><span class="nav-powered-text">Powered by Getnetworked</span></div>
@@ -763,10 +774,6 @@ nav{animation:navSlideIn .45s ease both;}
      ║  HOME                            ║
      ╚══════════════════════════════════╝ -->
 <div id="pg-home" class="pg on">
-  <div onclick="go('ev-summit')" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:.6rem 1rem;background:linear-gradient(90deg,rgba(201,162,39,.16),rgba(201,162,39,.06));border-bottom:1px solid rgba(201,162,39,.3);text-align:center;">
-    <span style="font-family:var(--fm);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);">Atlanta AI Day · December 10, 2026 · Life Time Work Sandy Springs</span>
-    <span style="font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wht);text-decoration:underline;">Explore the Summit →</span>
-  </div>
   <section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 2.5rem 4rem;position:relative;overflow:hidden;">
     <div style="display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;width:100%;position:relative;z-index:1;">
     <div>
@@ -849,6 +856,19 @@ nav{animation:navSlideIn .45s ease both;}
         <a id="summit-cta-home" href="https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027?r=aaahoi" target="_blank" class="bp" style="text-decoration:none;background:var(--gold);color:#0a0a0f;">Join the Priority List →</a>
         <button class="bo" onclick="go('ev-summit')">Explore the Day</button>
       </div>
+    </div>
+    <div style="max-width:720px;margin:1.25rem 0 0;">
+<div id="hspk-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:0;">
+          <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Apply to Speak</div>
+          <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Want to be on stage? Tell us who you are and our team will follow up.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
+            <input id="hspk-first" placeholder="First name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+            <input id="hspk-last" placeholder="Last name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+          </div>
+          <input id="hspk-email" type="email" placeholder="Email address" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;">
+          <button class="bp" id="hspk-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--gold);color:#0a0a0f;" onclick="submitIntake('speaker','hspk')">Apply to Speak →</button>
+          <div id="hspk-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
+        </div>
     </div>
   </section>
 
@@ -1862,6 +1882,18 @@ nav{animation:navSlideIn .45s ease both;}
         <p class="ev-para">Across keynotes, community-led sessions, live demos, and curated networking, we&rsquo;ll look back at what actually worked in AI throughout 2026 — the year of agents — and look forward at what&rsquo;s coming next. Not hype. Not theory. Real use cases, real workflows, real operators.</p>
         <p class="ev-para">The day is built in blocks, not back-to-back sessions — with real breaks and space to connect, because the best conversations happen in the hallway, not just on stage.</p>
 
+        <div id="spk-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:1.5rem;">
+          <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Apply to Speak</div>
+          <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Want to be on stage? Tell us who you are and our team will follow up.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
+            <input id="spk-first" placeholder="First name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+            <input id="spk-last" placeholder="Last name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+          </div>
+          <input id="spk-email" type="email" placeholder="Email address" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;">
+          <button class="bp" id="spk-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--gold);color:#0a0a0f;" onclick="submitIntake('speaker')">Apply to Speak →</button>
+          <div id="spk-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
+        </div>
+
         <div class="ev-sect" style="margin-top:2rem;">What Attendees Will Experience</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.65rem;margin-bottom:1.5rem;">
           <div style="border:1px solid rgba(201,162,39,.22);border-radius:10px;padding:1.1rem;background:rgba(201,162,39,.03);">
@@ -1927,17 +1959,7 @@ nav{animation:navSlideIn .45s ease both;}
           <div style="font-family:var(--fd);font-size:1.3rem;color:var(--gold);margin-bottom:.35rem;">Speaker Announcements Coming Soon</div>
           <div style="font-size:.8rem;color:var(--mu);">The lineup will be published here as each speaker is confirmed.</div>
         </div>
-        <div id="speaker-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:1.5rem;">
-          <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Apply to Speak</div>
-          <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Want to be on stage? Tell us who you are and our team will follow up.</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
-            <input id="spk-first" placeholder="First name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
-            <input id="spk-last" placeholder="Last name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
-          </div>
-          <input id="spk-email" type="email" placeholder="Email address" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;">
-          <button class="bp" id="spk-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--gold);color:#0a0a0f;" onclick="submitIntake('speaker')">Apply to Speak →</button>
-          <div id="spk-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
-        </div>
+        
 
         <div class="ev-sect">Tickets</div>
         <p class="ev-para">Registration is handled by GetNetworked. Pricing below is confirmed; each tier opens for purchase on the GetNetworked event page, and this page updates when sales go live.</p>
@@ -2003,7 +2025,7 @@ nav{animation:navSlideIn .45s ease both;}
           </div>
         </div>
         <p style="font-size:.74rem;color:var(--mu);margin-bottom:.6rem;">Sponsorship benefits are subject to organizer approval and availability.</p>
-        <div id="sponsor-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:1.5rem;">
+        <div id="spo-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:1.5rem;">
           <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Become a Sponsor</div>
           <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Tell us a little about your organization and our team will follow up with packages and availability.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
@@ -3843,8 +3865,8 @@ var SUMMIT_PARTNERS = [];           // {name, logo, url, blurb, session}
 var SUMMIT_TICKETS_LIVE = false;
 var SUMMIT_REG_URL = 'https://app.getnetworked.com/event/-executive-summit-the-state-of-ai-in-business-2027?r=aaahoi';
 
-async function submitIntake(kind){
-  var P = kind === 'speaker' ? 'spk' : 'spo';
+async function submitIntake(kind, P){
+  P = P || (kind === 'speaker' ? 'spk' : 'spo');
   var v = function(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; };
   var st = document.getElementById(P + '-status');
   var btn = document.getElementById(P + '-btn');
@@ -3856,10 +3878,10 @@ async function submitIntake(kind){
 
   var payload = { firstName: first, lastName: last, email: email };
   if (kind === 'sponsor') {
-    payload.company = v('spo-company');
-    var sel = document.getElementById('spo-interest');
+    payload.company = v(P+'-company');
+    var sel = document.getElementById(P+'-interest');
     payload.interest = (sel && sel.selectedIndex > 0) ? sel.value : '';
-    payload.message = v('spo-message');
+    payload.message = v(P+'-message');
   }
 
   var label = btn.textContent;
@@ -3872,7 +3894,7 @@ async function submitIntake(kind){
     var data = await res.json().catch(function(){ return {}; });
     if (res.ok && data.success) {
       // hide the inputs so the confirmation is the only thing left
-      var form = document.getElementById(kind + '-form');
+      var form = document.getElementById(P + '-form');
       [].forEach.call(form.querySelectorAll('input, select, textarea, button, div[style*="grid"]'), function(el){ el.style.display = 'none'; });
       say('\u2713 Thanks, ' + first + '. Check your inbox \u2014 we just sent a confirmation, and our team will follow up with you.', 'var(--green)');
     } else {
