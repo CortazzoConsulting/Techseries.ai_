@@ -317,11 +317,19 @@ the Atlanta AI Day hero. They call `jumpToForm(P)`, which scrolls to `{P}-form` 
 focuses its first field. Hidden below 1100px, where they would collide with the
 title — the Get Involved block right below covers that case.
 
-The **home page** carries the same three options as a `.home-actions` card row in
-the Atlanta AI Day block, below the RSVP buttons. Unlike `.ev-hero-actions` it sits
-in normal flow, so it survives on phones (one column below 768px). The cards are a
-switcher, not links: `showHomeIntake(P)` opens one of the three home forms and
-hides the other two, so the page stays short. Speaker is open by default.
+The **home page** carries the same three options as a `.home-actions` card row, in
+the hero's right-hand column directly above the Atlanta AI Day flyer card — the
+landing-screen position, no scrolling. Unlike `.ev-hero-actions` it sits in normal
+flow rather than absolutely positioned, so it survives on phones: `.hhero-event`
+is a flex column and the row takes `order:2` below 900px, which keeps the flyer
+first on mobile with the cards straight under it.
+- That column is only 420px wide, so a `@media(min-width:901px)` block shrinks the
+  cards (`.55rem`, `white-space:nowrap` on the label) to hold each label on one
+  line. **Keep that block desktop-scoped** — at phone widths those sizes drop under
+  the 10.5px floor the mobile audit enforces.
+The cards are a switcher, not links: `showHomeIntake(P)` opens one of the three
+home forms (further down, in the Atlanta AI Day block) and hides the other two, so
+the page stays short. Speaker is open by default.
 - **Gotcha:** the mobile block's catch-all
   `.pg button:not(.bp):not(.bo):not(.ev-back){display:inline-flex;align-items:center}`
   outranks `.home-actions button` and pulls the card's label and `.ha-sub` onto one
@@ -336,6 +344,13 @@ page) and `hspk` / `hspo` / `hspar` (the same three on the home page). Every ins
 needs its own `{P}-form`, `{P}-first`, `{P}-last`, `{P}-email`, `{P}-btn`,
 `{P}-status` — duplicate ids will break both copies. The home copies are generated
 from the AI Day originals, so keep the two sets in step when you change a field.
+
+`jumpToForm(P)` scrolls with `window.scrollTo`, not `scrollIntoView`: `.pg` sets
+`overflow-y:auto`, so it counts as the form's scrolling ancestor even though it
+never scrolls, and `scrollIntoView` stalls against it once the form is more than a
+screen away. The offset it subtracts clears the fixed topbar + nav. Note that
+smooth scrolling is rAF-driven, so it does not visibly run while the preview pane
+is hidden — stub `window.scrollTo` to check the target instead of the animation.
 - `POST /speaker` — firstName, lastName, email
 - `POST /sponsor` — plus company, interest, message
 - `POST /partner` — community partners / AI community builders, same shape as sponsor
