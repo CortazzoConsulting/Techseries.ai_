@@ -51,6 +51,15 @@ body{padding-top:var(--tb);}
 .ev-hero-actions button:hover{background:rgba(201,162,39,.18);border-color:var(--gold);}
 .ev-hero-actions .eha-sub{display:block;font-family:var(--fb);font-size:.68rem;letter-spacing:0;text-transform:none;color:var(--mu);margin-top:3px;}
 @media(max-width:1100px){.ev-hero-actions{display:none;}}
+/* Home page version of the hero actions: same cards, laid out in flow so they
+   survive on phones (the event-hero copy is absolute and hides below 1100px). */
+.home-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1.25rem 0 .9rem;max-width:720px;}
+.home-actions button{display:block;width:100%;padding:.8rem .9rem;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.5);border-radius:8px;color:var(--gold);font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-align:left;transition:background .2s,border-color .2s;}
+.home-actions button:hover,.home-actions button[aria-pressed="true"]{background:rgba(201,162,39,.2);border-color:var(--gold);}
+.home-actions .ha-green{background:rgba(0,196,114,.08);border-color:rgba(0,196,114,.5);color:var(--green);}
+.home-actions .ha-green:hover,.home-actions .ha-green[aria-pressed="true"]{background:rgba(0,196,114,.2);border-color:var(--green);}
+.home-actions .ha-sub{display:block;font-family:var(--fb);font-size:.68rem;letter-spacing:0;text-transform:none;color:var(--mu);margin-top:3px;}
+@media(max-width:768px){.home-actions{grid-template-columns:1fr;}}
 /* the hero tag pill is full-width; stop it short of the corner actions so the
    two never overlap. Scoped to this page — other event heroes keep full width. */
 @media(min-width:1101px){#pg-ev-summit .ev-tag{max-width:calc(100% - 262px);}}
@@ -79,6 +88,9 @@ body{padding-top:var(--tb);}
      disturbing full-width block anchors or gallery images */
   .pg a:not(.gallery-img):not([style*="display:block"]):not(.bp):not(.bo),
   .pg button:not(.bp):not(.bo):not(.ev-back){display:inline-flex;align-items:center;min-height:40px;}
+  /* the Get Involved cards stack a label over a sub-line, so they must stay
+     block-level — the inline-flex rule above would pull the two onto one row */
+  .home-actions button{display:block !important;min-height:44px;}
 }
 @media(max-width:900px){:root{--tb:32px;}.topbar{padding:0 .75rem;gap:.4rem;}}
 .pg.on{display:block;}
@@ -887,14 +899,19 @@ nav{animation:navSlideIn .45s ease both;}
       <div style="font-size:1rem;color:var(--wht);margin-bottom:.9rem;">The State of AI — Now &amp; Next</div>
       <p style="color:var(--mu);line-height:1.8;font-size:.9rem;max-width:720px;margin-bottom:1rem;">Tech Series&rsquo; year-end flagship unites Atlanta&rsquo;s AI communities under one roof — founders, operators, enterprise and IT leaders, builders, engineers, creatives, investors, and the next wave just getting started. Keynotes, community-led sessions, live demos, and curated networking across one full day.</p>
       <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem;font-size:.8rem;color:var(--mu);">
-        <div>📅 Thursday, December 10, 2026</div><div>📍 Life Time Work Sandy Springs</div><div>⏰ 9:00 AM – 6:00 PM</div><div style="color:var(--gold);">🎟 Tickets starting at $79</div>
+        <div>📅 Thursday, December 10, 2026</div><div>📍 Life Time Work Sandy Springs</div><div>⏰ 9:00 AM – 6:00 PM</div><div id="summit-price-home" style="color:var(--gold);">🎟 Tickets starting at $79</div>
       </div>
       <div class="row" style="flex-wrap:wrap;">
         <a id="summit-cta-home" href="https://app.getnetworked.com/event/atlanta-ai-day?r=aaahoi" target="_blank" class="bp" style="text-decoration:none;background:var(--gold);color:#0a0a0f;">RSVP for Atlanta AI Day →</a>
         <button class="bo" onclick="go('ev-summit')">Explore the Day</button>
       </div>
     </div>
-    <div style="max-width:720px;margin:1.25rem 0 0;">
+    <div class="home-actions">
+      <button data-form="hspk" aria-pressed="true" onclick="showHomeIntake('hspk')">Apply to Speak →<span class="ha-sub">Get on the stage</span></button>
+      <button data-form="hspo" aria-pressed="false" onclick="showHomeIntake('hspo')">Become a Sponsor →<span class="ha-sub">Put your brand in the room</span></button>
+      <button class="ha-green" data-form="hspar" aria-pressed="false" onclick="showHomeIntake('hspar')">Community Partner →<span class="ha-sub">Bring your community</span></button>
+    </div>
+    <div style="max-width:720px;margin:0;">
 <div id="hspk-form" style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:0;">
           <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Apply to Speak</div>
           <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Want to be on stage? Tell us who you are and our team will follow up.</div>
@@ -906,6 +923,47 @@ nav{animation:navSlideIn .45s ease both;}
           <button class="bp" id="hspk-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--gold);color:#0a0a0f;" onclick="submitIntake('speaker','hspk')">Apply to Speak →</button>
           <div id="hspk-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
         </div>
+<div id="hspo-form" hidden style="border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:1.5rem;background:rgba(201,162,39,.03);margin-bottom:0;">
+          <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Become a Sponsor</div>
+          <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Tell us a little about your organization and our team will follow up with packages and availability.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
+            <input id="hspo-first" placeholder="First name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+            <input id="hspo-last" placeholder="Last name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+          </div>
+          <input id="hspo-email" type="email" placeholder="Email address" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;">
+          <input id="hspo-company" placeholder="Company / organization" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;">
+          <select id="hspo-interest" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;background:rgba(10,10,15,.9);">
+            <option>Sponsorship level — not sure yet</option>
+            <option>Presenting Sponsor ($10,000)</option>
+            <option>Platinum Sponsor ($5,000)</option>
+            <option>Gold Sponsor ($2,500)</option>
+            <option>Silver Sponsor ($1,000)</option>
+          </select>
+          <textarea id="hspo-message" rows="3" placeholder="Anything you'd like us to know (optional)" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;"></textarea>
+          <button class="bp" id="hspo-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--gold);color:#0a0a0f;" onclick="submitIntake('sponsor','hspo')">Send Sponsorship Inquiry →</button>
+          <div id="hspo-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
+        </div>
+
+<div id="hspar-form" hidden style="border:1px solid rgba(0,196,114,.3);border-radius:12px;padding:1.5rem;background:rgba(0,196,114,.03);margin-bottom:0;">
+            <div style="font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;">Community Partner</div>
+            <div style="font-size:.86rem;color:var(--wht);margin-bottom:.9rem;">Run an AI community, meetup, or builder group? Bring your people into the room.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
+              <input id="hspar-first" placeholder="First name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+              <input id="hspar-last" placeholder="Last name" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;">
+            </div>
+            <input id="hspar-email" type="email" placeholder="Email address" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;">
+            <input id="hspar-company" placeholder="Community / organization" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;">
+            <select id="hspar-interest" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.6rem;background:rgba(10,10,15,.9);">
+              <option>How you'd like to take part</option>
+              <option>Host a community-led session</option>
+              <option>Co-promote to our members</option>
+              <option>Run a lane or track</option>
+              <option>Partner showcase presence</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+            <textarea id="hspar-message" rows="3" placeholder="Tell us about your community (optional)" style="padding:.75rem;background:rgba(250,250,248,.05);border:1px solid var(--bo);border-radius:6px;color:var(--wht);font-family:var(--fb);font-size:.85rem;box-sizing:border-box;width:100%;margin-bottom:.75rem;"></textarea>
+            <button class="bp" id="hspar-btn" style="width:100%;justify-content:center;padding:.9rem;background:var(--green);color:#0a0a0f;" onclick="submitIntake('partner','hspar')">Become a Community Partner →</button>
+            <div id="hspar-status" style="display:none;font-size:.8rem;margin-top:.75rem;text-align:center;line-height:1.5;"></div>
     </div>
   </section>
 
@@ -1901,7 +1959,7 @@ nav{animation:navSlideIn .45s ease both;}
       <div class="ev-meta-item">📅 Thursday, December 10, 2026</div>
       <div class="ev-meta-item">⏰ 9:00 AM – 6:00 PM EST</div>
       <div class="ev-meta-item">📍 Life Time Work Sandy Springs · Atlanta, GA</div>
-      <div class="ev-meta-item" style="color:var(--gold);">🎟 Tickets starting at $79</div>
+      <div class="ev-meta-item" id="summit-price-hero" style="color:var(--gold);">🎟 Tickets starting at $79</div>
     </div>
     <div class="row" style="flex-wrap:wrap;margin-top:1.5rem;">
       <a id="summit-cta-hero" href="https://app.getnetworked.com/event/atlanta-ai-day?r=aaahoi" target="_blank" class="bp" style="text-decoration:none;background:var(--gold);color:#0a0a0f;">RSVP for Atlanta AI Day →</a>
@@ -4186,6 +4244,18 @@ function tsFilterSpeakers(){
   if (empty) empty.style.display = shown ? 'none' : 'block';
 }
 
+// Home page: the three cards act as a switcher over the three intake forms,
+// so only one is open at a time and the page stays short.
+function showHomeIntake(P){
+  ['hspk','hspo','hspar'].forEach(function(k){
+    var f = document.getElementById(k + '-form');
+    if (f) f.hidden = (k !== P);
+    var b = document.querySelector('.home-actions button[data-form="' + k + '"]');
+    if (b) b.setAttribute('aria-pressed', k === P ? 'true' : 'false');
+  });
+  jumpToForm(P);
+}
+
 function jumpToForm(P){
   var form = document.getElementById(P + '-form');
   if (!form) return;
@@ -4281,6 +4351,12 @@ function summitInit(){
       ? 'Get Your Tickets \u2192'
       : (id === 'summit-cta-sticky' ? 'RSVP \u2192' : 'RSVP for Atlanta AI Day \u2192');
     el.href = SUMMIT_REG_URL;
+  });
+  ['summit-price-home','summit-price-hero'].forEach(function(id){
+    var el = document.getElementById(id); if (!el) return;
+    el.textContent = SUMMIT_TICKETS_LIVE
+      ? '\uD83C\uDF9F Tickets starting at $79'
+      : '\uD83C\uDF9F Free RSVP \u00b7 ticket tiers coming soon';
   });
   var pw = document.getElementById('summit-partners');
   if (pw && SUMMIT_PARTNERS.length){

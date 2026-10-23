@@ -292,6 +292,9 @@ reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
   purchasable tiers. When tiers go live, flipping the flag switches CTAs to
   "Get Your Tickets".
   Flip to `true` only after confirming a member of the public can actually buy.
+  `summitInit()` also rewrites `summit-price-home` and `summit-price-hero`: while
+  the flag is false they read "Free RSVP · ticket tiers coming soon" instead of
+  "Tickets starting at $79", which was promising a checkout that does not exist.
 - Sponsorship: Presenting $10K (1) · Platinum $5K (2) · Gold $2.5K (4) · Silver $1K (6)
 
 ## Mobile
@@ -314,11 +317,25 @@ the Atlanta AI Day hero. They call `jumpToForm(P)`, which scrolls to `{P}-form` 
 focuses its first field. Hidden below 1100px, where they would collide with the
 title — the Get Involved block right below covers that case.
 
+The **home page** carries the same three options as a `.home-actions` card row in
+the Atlanta AI Day block, below the RSVP buttons. Unlike `.ev-hero-actions` it sits
+in normal flow, so it survives on phones (one column below 768px). The cards are a
+switcher, not links: `showHomeIntake(P)` opens one of the three home forms and
+hides the other two, so the page stays short. Speaker is open by default.
+- **Gotcha:** the mobile block's catch-all
+  `.pg button:not(.bp):not(.bo):not(.ev-back){display:inline-flex;align-items:center}`
+  outranks `.home-actions button` and pulls the card's label and `.ha-sub` onto one
+  line. `.home-actions button{display:block !important}` inside that same media
+  query is what keeps them stacked. The event-page copy never hit this because it
+  hides below 1100px.
+
 Real forms, not mailto. `submitIntake(kind, P)` in `index.html` POSTs JSON to the
 Worker. `P` is the element-id prefix, so the same form can appear more than once:
-`spk` (speaker), `spo` (sponsor), `spar` (community partner), `hspk` (home speaker). Every instance
+`spk` / `spo` / `spar` (speaker, sponsor, community partner on the Atlanta AI Day
+page) and `hspk` / `hspo` / `hspar` (the same three on the home page). Every instance
 needs its own `{P}-form`, `{P}-first`, `{P}-last`, `{P}-email`, `{P}-btn`,
-`{P}-status` — duplicate ids will break both copies.
+`{P}-status` — duplicate ids will break both copies. The home copies are generated
+from the AI Day originals, so keep the two sets in step when you change a field.
 - `POST /speaker` — firstName, lastName, email
 - `POST /sponsor` — plus company, interest, message
 - `POST /partner` — community partners / AI community builders, same shape as sponsor
