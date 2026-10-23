@@ -117,8 +117,8 @@ across 3 events, 20+ speakers — and must not be swept up in a global find/repl
 | AI-Native Companies | Apr 30 | 4:00–7:30 PM | `#6b8cff` | Completed |
 | The Economics of AI | Jun 18 | 5:30–7:30 PM | `--green` | Completed |
 | Building AI-Ready Teams | Aug 20 | 5:00–7:30 PM | `--orange` | Completed |
-| AI in Real Estate: From Leads to Deals | Oct 22 | 5:00–8:30 PM | `--red` | CURRENT MAIN EVENT (ticketed) |
-| Atlanta AI Day: The State of AI — Now & Next | Dec 10 | 9:00 AM–6:00 PM | `--gold` | YEAR-END FLAGSHIP (ticketed) |
+| AI in Real Estate: From Leads to Deals | Oct 22 | 5:00–8:30 PM | `--red` | Completed |
+| Atlanta AI Day: The State of AI — Now & Next | Dec 10 | 9:00 AM–6:00 PM | `--gold` | **CURRENT MAIN EVENT** (free RSVP) |
 | TechSeries AM | Monthly | 7:30–9:00 AM | `#a78bfa` | Recurring |
 
 ## Getnetworked URLs
@@ -152,8 +152,34 @@ across 3 events, 20+ speakers — and must not be swept up in a global find/repl
   3,997 page views · 79 RSVPs · 4 sponsors · YouTube: https://youtu.be/85OhRvhN9jw
 - **pg-past-aug** — Aug 20, 2026 · Building AI-Ready Teams (Event 3 of 5)
   James Stovall (Workfast Consulting, ex-Deloitte) + Sara Branch
+- **pg-past-oct** — Oct 22, 2026 · AI in Real Estate (Event 4 of 5)
+  Revealed automatically by `data-ts-reveal` the moment the event ended, along with
+  its card in the `pg-past` grid. Attendance numbers and photos are still the empty
+  `data-ts-filled="no"` blocks — fill them and flip the flag when the figures exist.
 
-## Current Main Event — October 22
+## Current Main Event — Atlanta AI Day, December 10
+The home page was pivoted to Atlanta AI Day on Oct 23, 2026, the morning after the
+October event. See the Atlanta AI Day section below for the event itself; what the
+pivot changed on the home page:
+- The hero's primary button and the hero event card (the flyer card, which is the
+  **first thing on mobile**) are both Atlanta AI Day, in `--gold`.
+- Those two CTAs are `summit-cta-primary` and `summit-cta-flyer`; they are in
+  `summitInit()`'s id list, so `SUMMIT_TICKETS_LIVE` flips their label and href with
+  the other four. Never hard-code their text.
+- The hero card's ticket row reads "Free RSVP while ticket tiers are finalized",
+  which is what GetNetworked actually offers. Don't promise a price there until the
+  flag flips.
+- The timeline's December row said `DEC 9` while its badge said Dec 10 — fixed.
+- The home YouTube block is labelled "Event Film", not "Latest Recap": the film is
+  June's and later events now have recaps of their own.
+
+The October page (`pg-ev-october`) is kept as an archive. Its hero badge reads
+"✅ Completed", its ticket meta line says the event has ended, and the sidebar CTA
+goes to the recap (`pg-past-oct`) with Atlanta AI Day underneath — it no longer
+sells tickets to a finished event. The August recap's "next event" button points at
+Atlanta AI Day too.
+
+### Previous main event — October 22 (completed)
 **Tech Series: AI in Real Estate — From Leads to Deals**
 How AI Agents & Automation Are Reshaping Real Estate. Industry-focused edition for
 agents, brokers, investors, developers, lenders, property managers, builders,
@@ -257,9 +283,10 @@ reachable at techseries.ai/atlanta-ai-day/ and the legacy /executive-summit/.
 - Built in blocks with real breaks, not back-to-back sessions
 - Tickets (GetNetworked is the only checkout): Founding Community $79 · Early Bird
   $99 · General $149 · VIP Executive $249 · Corporate Team $499 for 4
-- **`SUMMIT_TICKETS_LIVE` gates everything.** Still `false`: GetNetworked now lists
-  the event as Public (changed Oct 22, 2026) but it is still Free with an RSVP
-  request and no purchasable tiers — public ≠ on sale. While false,
+- **`SUMMIT_TICKETS_LIVE` gates everything.** Still `false` as of Oct 23, 2026:
+  GetNetworked lists the event as Public but still Free with a "Send RSVP Request"
+  button and no purchasable tiers — public ≠ on sale, and "full go" on the event is
+  not the same as tickets being buyable. While false,
   every tier reads "Not yet on sale" and all CTAs read "RSVP for Atlanta AI Day",
   matching GetNetworked, which still lists the event as a free RSVP with no
   purchasable tiers. When tiers go live, flipping the flag switches CTAs to
